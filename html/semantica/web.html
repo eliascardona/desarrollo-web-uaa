@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <title>La web semántica</title>
+</head>
+<body>
+    <main style="display: grid; width: 100%;">
+        <div style="display: grid; justify-self: center; width: 85%; place-items: center;">
+            <h1>La web semántica</h1>
+            Pablo Castells
+            <br>
+            Escuela Politécnica Superior
+            <br>
+            Universidad Autónoma de Madrid
+            <br>
+            pablo.castells@uam.es
+            <br>
+            <a href="http://www.ii.uam.es/~castells">
+                http://www.ii.uam.es/~castells
+            </a>
+        </div>
+        <article style="display: grid; justify-self: center; width: 85%; place-items: center;">
+            <section>
+                <h3>Resumen</h3>
+                <p style="text-align:justify;">
+                    La web semántica es un área pujante en la confluencia de la Inteligencia Artificial y las <br>
+                    tecnologías web que propone introducir descripciones explícitas sobre el significado de <br>
+                    los recursos, para permitir que las propias máquinas tengan un nivel de comprensión de la <br>
+                    web suficiente como para hacerse cargo de una parte, la más costosa, rutinaria, o <br>
+                    físicamente inabarcable, del trabajo que actualmente realizan manualmente los usuarios <br>
+                    que navegan e interactúan con la web. A partir de la situación actual de la web y sus <br>
+                    limitaciones, en este artículo se motivan y explican las propuestas de la web semántica, se <br>
+                    describen las tecnologías más importantes desarrolladas para llevarlas a cabo, así como el <br>
+                    punto en el que se encuentra este proyecto promovido por el propio inventor de la web. <br>
+                </p>
+            </section>
+            <!-- Fin del primer apartado -->
+            <section>
+                <h3>Introducción</h3>
+                <p style="text-align:justify;">
+                    En poco más de una década desde su aparición, la World Wide Web se ha convertido en <br>
+                    un instrumento de uso cotidiano en nuestra sociedad, comparable a otros medios tan <br>
+                    importantes como la radio, la televisión o el teléfono, a los que aventaja en muchos <br>
+                    aspectos. La web es hoy un medio extraordinariamente flexible y económico para la <br>
+                    comunicación, el comercio y los negocios, ocio y entretenimiento, acceso a información <br>
+                    y servicios, difusión de cultura, etc. Paralelamente al crecimiento espectacular de la web, <br>
+                    las tecnologías que la hacen posible han experimentado una rápida evolución. Desde las <br>
+                    primeras tecnologías básicas: <br>
+                    <a href="#concepto1" id="ref1">HTML<sup>1</sup></a>
+                    , <a href="#concepto2" id="ref2">HTTP<sup>2</sup></a>
+                    , <a href="#concepto3" id="ref3">CGI<sup>3</sup></a>
+                    , <a href="#concepto4" id="ref4">Java<sup>4</sup></a>
+                    , <a href="#concepto5" id="ref5">JavaScript<sup>5</sup></a>
+                    , <a href="#concepto6" id="ref6">ASP<sup>6</sup></a>
+                    , <a href="#concepto7" id="ref7">JSP<sup>7</sup></a>
+                    , <a href="#concepto8" id="ref8">PHP<sup>8</sup></a>
+                    , <a href="#concepto9" id="ref9">Flash<sup>9</sup></a>
+                    , <a href="#concepto10" id="ref10">JEE<sup>10</sup></a>
+                    , <a href="#concepto11" id="ref11">XML<sup>11</sup></a><br>
+                    por citar algunas de las más conocidas, que permiten una web mejor, más amplia, más <br>
+                    potente, más flexible, o más fácil de mantener. Estos cambios influyen y son al tiempo <br>
+                    influidos por la propia transformación de lo que entendemos por WWW. La generación <br>
+                    dinámica de páginas, el acoplamiento con bases de datos, la mayor interactividad con el <br>
+                    usuario, la concepción de la web como plataforma universal para el despliegue de <br>
+                    aplicaciones, la adaptación al usuario, son algunas de las tendencias evolutivas más <br>
+                    marcadas de los últimos años.
+                </p>
+            </section>
+            <!-- Se añade espaciado para poner debajo una lista con las referencias -->
+            <hr style="width: 65%;">
+            <!-- Inicio de Order-List -->
+            <ol>
+                <li><a href="http://www.w3.org/MarkUp/" id="concepto1">HTML</a></li>
+                <li><a href="http://www.w3.org/Protocols/" id="concepto2">HTTP</a></li>
+                <li><a href="http://hoohoo.ncsa.uiuc.edu/cgi/" id="concepto3">CGI</a></li>
+                <li><a href="http://java.sun.com/" id="concepto4">Java</a></li>
+                <li><a href="http://www.mozilla.org/js/" id="concepto5">JavaScript</a></li>
+                <li><a href="http://www.asp.net/" id="concepto6">ASP</a></li>
+                <li><a href="http://java.sun.com/products/jsp/" id="concepto7">JSP</a></li>
+                <li><a href="http://php.apache.org/" id="concepto8">PHP</a></li>
+                <li><a href="http://www.macromedia.com/" id="concepto9">Flash</a></li>
+                <li><a href="http://java.sun.com/j2ee/" id="concepto10">JEE</a></li>
+                <li><a href="http://www.w3.org/XML/" id="concepto11">XML</a></li>
+            </ol>
+            <!-- Fin de Order-List -->
+            <section>
+                La evolución de la web no termina aquí ni mucho menos. Son diversos los aspectos <br>
+                susceptibles de mejorar. Entre las últimas tendencias que pueden repercutir en el futuro <br>
+                de la web a medio plazo, a finales de los 90 surge la visión de lo que se ha dado en llamar <br>
+                la web semántica [Berners-Lee 2001]. Se trata de una corriente, promovida por el propio <br>
+                inventor de la web y presidente del consorcio W3C12, cuyo último fin es lograr que las <br>
+                máquinas puedan entender, y por tanto utilizar, lo que la web contiene. Esta nueva web <br>
+                estaría poblada por agentes o representantes software capaces de navegar y realizar <br>
+                operaciones por nosotros para ahorrarnos trabajo y optimizar los resultados. Para <br>
+                conseguir esta meta, la web semántica propone describir los recursos de la web con <br>
+                representaciones procesables (es decir, entendibles) no sólo por personas, sino por <br>
+                programas que puedan asistir, representar, o reemplazar a las personas en tareas rutinarias <br>
+                o inabarcables para un humano. Las tecnologías de la web semántica buscan desarrollar <br>
+                una web más cohesionada, donde sea aún más fácil localizar, compartir e integrar <br>
+                información y servicios, para sacar un partido todavía mayor de los recursos disponibles <br>
+                en la web. <br>                                
+            </section>
+        </article>
+
+        <article style="display: grid; justify-self: center; width: 85%; place-items: center;">
+            <section>
+                <h3>Un poco de historia</h3>
+                La aparición de la WWW se puede situar en 1989 [Abrams 1998, Connolly 2000], <br>
+                cuando Tim Berners-Lee presentó su proyecto de “World Wide Web” [Berners-Lee <br>
+                1989] en el CERN (Suiza), con las características esenciales que perduran en nuestros <br>
+                días. El propio Berners-Lee completó en 1990 el primer servidor web y el primer cliente, <br>
+                y un año más tarde publicó el primer borrador de las especificaciones de HTML y HTTP. <br>
+                El lanzamiento en 1993 de Mosaic, el primer navegador de dominio público, compatible <br>
+                con Unix, Windows, y Macintosh, por el National Center for Supercomputing <br>
+                Applications (NCSA), marca el momento en que la WWW se da a conocer al mundo, <br>
+                extendiéndose primero en universidades y laboratorios, y en cuestión de meses al público <br>
+                en general, iniciando el que sería su vertiginoso crecimiento. Los primeros usuarios <br>
+                acogieron con entusiasmo la facilidad con que se podían integrar texto y gráficos y saltar <br>
+                de un punto a otro del mundo en una misma interfaz, y la extrema sencillez para <br>
+                contribuir contenidos a una web mundial. <br>
+                Por estas mismas fechas se define la interfaz CGI para la generación dinámica de páginas <br>
+                web, con lo que se consigue ofrecer información actualizada en tiempo real, enlazar con <br>
+                bases de datos, o tener en cuenta entradas del usuario, y más aún, servir como punto de <br>
+                acceso y plataforma para la ejecución de aplicaciones distribuidas. En 1994 miembros del <br>
+                equipo que creó Mosaic desarrollan Netscape, un navegador con sensibles mejoras que <br>
+                contribuye a impulsar la propagación de la web. Este mismo año se celebra el primer <br>
+                congreso internacional de la WWW, y unos meses más tarde se constituye el consorcio <br>
+                W3C, que desde entonces y presidido por Tim Berners-Lee, se ha hecho cargo de <br>
+                estandarizar las principales tecnologías web. En 1995 Sun lanza oficialmente la primera <br>
+                versión del lenguaje Java, y un año más tarde Netscape presenta JavaScript. Estos <br>
+                lenguajes y otros posteriores permiten que las propias páginas web contengan programas <br>
+                enteros, dando opción a una mayor autonomía respecto del servidor, mayor eficiencia, <br>
+                capacidad dinámica y capacidad de interacción. <br>
+            </section>
+            <section>
+                <h3>La web hoy</h3>
+                    Aunque es sumamente difícil medir el tamaño de la web, se estima que hoy día unos 109 <br>
+                    usuarios utilizan la web, y que ésta contiene del orden de 4 · 109 documentos, <br>
+                    un volumen de información equivalente a entre 14 y 28 millones de libros [Bergman 2001]. <br>
+                    Como dato comparativo, la asociación American Research Libraries, que agrupa unas 100 <br>
+                    bibliotecas en EE.UU., tiene catalogados unos 3.7 millones de libros. La biblioteca de la <br>
+                    Universidad de Harvard, la mayor de EE.UU., contiene en torno a 15 millones de libros. <br>
+                    Estas cifras incluyen sólo lo que se ha dado en denominar la web superficial, formada por <br>
+                    los documentos estáticos accesibles en la web. Se ha calculado que la llamada web <br>
+                    profunda, constituida por las bases de datos cuyos contenidos, no directamente <br>
+                    accesibles, se hacen visibles mediante páginas generadas dinámicamente, puede contener <br>
+                    un tamaño de información varios cientos de veces mayor, y de mucha mejor calidad, que <br>
+                    la web superficial, y crece a un ritmo aún mayor que ésta [O’Neill 2003]. Se estima que <br>
+                    el tamaño de la web profunda ha superado ya al volumen total de información impresa <br>
+                    existente en todo el planeta. <br>
+                    Hoy casi todo está representado de una u otra forma en la web, y con la ayuda de un buen <br>
+                    buscador, podemos encontrar información sobre casi cualquier cosa que necesitemos. La <br>
+                    web está cerca de convertirse en una enciclopedia universal del conocimiento humano. <br>
+                    Por otra parte la web nos permite realizar diferentes actividades de nuestra vida diaria con <br>
+                    una comodidad, economía y eficiencia sin precedentes: sin movernos de casa podemos <br>
+                    comprar todo tipo de productos y servicios, gestionar una cuenta bancaria, buscar un <br>
+                    restaurante, consultar la cartelera, leer la prensa, localizar a una persona, matricularnos en <br>
+                    la universidad, acceder a un callejero, o trabajar desde nuestro domicilio. <br>
+                    No obstante, en este panorama tan favorable hay espacio para mejoras. Por ejemplo, el <br>
+                    enorme tamaño que ha alcanzado la web, a la vez que es una de las claves de su éxito, <br>
+                    hace que algunas tareas (por ejemplo encontrar la planificación óptima con transporte, <br>
+                    alojamiento, etc., entre todas las posibles para un viaje bajo ciertas condiciones), <br>
+                    requieran un tiempo excesivo para una persona o resulten sencillamente inabarcables. <br>
+                    Desarrollar programas que realicen estas tareas en nuestro lugar es enormemente <br>
+                    complicado, ya que es muy difícil reproducir, y más costoso aún mantener, en una <br>
+                    máquina la capacidad de una persona para comprender los contenidos de la web tal y <br>
+                    como están codificados actualmente. <br>
+                    La asombrosa eficacia de los buscadores actuales tiene también sus límites. Por ejemplo, <br>
+                    si queremos conocer la historia de Netscape, los resultados de una consulta como <br>
+                    “Netscape history”, realizada el momento de escribir este artículo13, nos informan sobre <br>
+                    las herramientas de históricos de este navegador, pero no nos dicen nada sobre el origen y <br>
+                    evolución de Netscape. Igualmente, para averiguar qué organismo se ocupa de <br>
+                    estandarizar CGI, o en qué fecha apareció la primera versión de Java, necesitaremos <br>
+                    realizar varias consultas y leer varios documentos y artículos hasta llegar indirectamente <br>
+                    a la respuesta buscada. Si introducimos la palabra “Ketchup” para buscar información <br>
+                    sobre el grupo de música del mismo nombre, obtendremos enlaces a restaurantes, recetas, <br>
+                    fabricantes, distribuidores y clubes de aficionados al condimento, y finalmente lo que <br>
+                    buscábamos (posiblemente ni siquiera esto si el grupo fuese menos popular). <br>
+                    Si buscamos 13 Con los continuos cambios de la web y los algoritmos de los buscadores, <br>
+                    los resultados de estas pruebas pueden variar de un día para otro. <br>
+                    un “artículo sobre García Márquez”, encontraremos decenas de artículos de García <br>
+                    Márquez, pero ninguno que trate sobre este autor. Si preguntamos sobre estándares XML <br>
+                    para la enseñanza (“XML education”), la mayor parte de los resultados se referirán a la <br>
+                    enseñanza de XML. <br><br>
+                    Todos estos ejemplos son el síntoma de una causa común: la falta de capacidad de las <br>
+                    representaciones en que se basa la web actual para expresar significados. Los contenidos <br>
+                    y servicios en la web se presentan en formatos (p.e. HTML) e interfaces (p.e. formularios)
+                    comprensibles por personas, pero no por máquinas. La figura 1 ejemplifica esta situación con una versión <br>
+                    simplificada de una página de información meteorológica. <br><br>
+                    Mientras que la presentación de los datos en el navegador (izquierda) es inmediatamente <br>
+                    comprendida por una persona, es muy difícil para el ordenador entender cuál es la <br>
+                    temperatura, el estado del cielo, y demás semántica del documento, al estar <br>
+                    entremezclada con las etiquetas de formato (derecha). <br>
+            </section>
+        </article>
+        <br>
+        <br>
+        <article style="display: grid; justify-self: center; width: 85%; place-items: center;">
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+                <figure>
+                    <img src="./img/clima.jpeg" alt="clima">
+                    <figcaption>a. La web vista por una persona</figcaption>
+                </figure>
+                <span>
+                    <code>
+                        <table width=100%><tr bgcolor=CCCCFF><td>
+                        <b>Harare Today</b></td></tr> <tr><td>at 1:00 pm CAT</td></tr>
+                        <tr><td><table width=100%><tr align=center><td rowspan=2 
+                        bgcolor=FFCC66>Currently:<br><b><font size=+2>21&ordm;C</font>
+                        </b></td><td rowspan=2 bgcolor=EEEEEE>IMAGE SOURCE
+                        <br>Thunderstorms</td> <td bgcolor=FF9966>Hi: <b>27</b></td></tr>
+                        <tr align=center><td bgcolor=FFFF99>Lo: <b>18</b></td></tr>
+                        </table><p><center>IMAGE SOURCE</center><p><table 
+                        width=100%><tr><td><b>Appar Temp:</b></td><td>21&deg;</td><td>
+                        <b>Dewpoint:</b></td><td>16&deg;</td></tr><tr><td><b>Barometer:
+                        </b></td><td>1017 mb; falling</td><td><b>Wind:</b></td><td>SE/10
+                        mph </td></tr><tr><td><b>Humidity:</b></td><td>73%</td><td><b>
+                        Visibility:</b></td><td>6 mi</td></tr></table></td></tr>
+                        </table>
+                    </code>
+                </span>
+            </div>
+            <h4>Figura 1. La web actual está orientada al consumo humano.</h4>
+        </article>
+
+        <article style="display: grid; justify-self: center; width: 85%; place-items: center;">
+            <section>
+                En estas condiciones es poco viable automatizar tareas mediante software en substitución <br>
+                del humano. Un programa puede llevar al usuario hasta lugares en la web, generar, <br>
+                transportar, transformar y ofrecer la información a las personas, pero la máquina <br>
+                sencillamente no sabe lo que esta información significa, y por tanto su capacidad de <br>
+                actuación autónoma es muy limitada. Esta misma limitación expresiva hace que la noción <br>
+                de semántica que manejan los buscadores web se limite a palabras clave con pesos, pero <br>
+                planas e inconexas, lo que no permite reconocer ni solicitar significados más elaborados. <br>
+            </section>
+            <section>
+                <h3>La web sem&aacute;ntica</h3>
+                La web semántica<sup>14</sup> [Berners-Lee 2001] propone superar las limitaciones de la web actual <br>
+                mediante la introducción de descripciones explícitas del significado, la estructura interna <br>
+                y la estructura global de los contenidos y servicios disponibles en la WWW. Frente a la <br>
+                semántica implícita, el crecimiento caótico de recursos, y la ausencia de una organización <br>
+                clara de la web actual, la web semántica aboga por clasificar, dotar de estructura y anotar <br>
+                los recursos con semántica explícita procesable por máquinas. La figura 2 ilustra esta <br>
+                propuesta. Actualmente la web se asemeja a un grafo formado por nodos del mismo tipo, <br>
+                y arcos (hiperenlaces) igualmente indiferenciados. Por ejemplo, no se hace distinción <br>             
+                <sub>14</sub> http://www.semanticweb.org/, http://www.ontology.org/ <br>
+                entre la página personal de un profesor y el portal de una tienda on-line, como tampoco <br>
+                se distinguen explícitamente los enlaces a las asignaturas que imparte un profesor de los <br>
+                enlaces a sus publicaciones. Por el contrario en la web semántica cada nodo (recurso) <br>
+                tiene un tipo (profesor, tienda, pintor, libro), y los arcos representan relaciones <br>
+                explícitamente diferenciadas (pintor – obra, profesor – departamento, libro – editorial). <br>
+            </section>
+        </article>
+
+        <article style="display: grid; justify-self: center; width: 85%; place-items: center;">
+            <section>
+                La web semántica mantiene los principios que han hecho un éxito de la web actual, como <br>
+                son los principios de descentralización, compartición, compatibilidad, máxima facilidad <br>
+                de acceso y contribución, o la apertura al crecimiento y uso no previstos de antemano. En <br>
+                este contexto un problema clave es alcanzar un entendimiento entre las partes que han de <br>                
+                intervenir en la construcción y explotación de la web: usuarios, desarrolladores y <br>
+                programas de muy diverso perfil. La web semántica rescata la noción de ontología del <br>
+                campo de la Inteligencia Artificial como vehículo para cumplir este objetivo. <br>
+                Gruber define ontología como “a formal explicit specification of a shared <br>
+                conceptualization” [Gruber 1993]. Una ontología es una jerarquía de conceptos con <br>
+                atributos y relaciones, que define una terminología consensuada para definir redes <br>
+                semánticas de unidades de información interrelacionadas. Una ontología proporciona un <br>
+                vocabulario de clases y relaciones para describir un dominio, poniendo el acento en la <br>
+                compartición del conocimiento y el consenso en la representación de éste. Por ejemplo, <br>
+                una ontología sobre arte podría incluir clases como Pintor, Cuadro, Estilo o Museo, y <br>
+                relaciones como autor de un cuadro, pintores pertenecientes a un estilo artístico u obras <br>
+                localizadas en un museo. <br>
+            </section>
+            <section>
+                La idea es que la web semántica esté formada (al menos en parte) por una red de nodos <br>
+                tipificados e interconectados mediante clases y relaciones definidas por una ontología <br>
+                compartida por sus distintos autores. Por ejemplo, una vez establecida una ontología <br>
+                sobre cuadros y pintura, un museo virtual puede organizar sus contenidos definiendo <br>
+                instancias de pintores, cuadros, etc., interrelacionándolas y publicándolas en la web <br>
+                semántica. La adopción de ontologías comunes es clave para que todos los que participen <br>
+                de la web semántica, contribuyendo o consumiendo recursos, puedan trabajar de forma <br>
+                autónoma con la garantía de que las piezas encajen. Así por ejemplo varios museos <br>
+                podrían colaborar para dar lugar a un gran meta-museo que integre los contenidos de <br>
+                todos ellos. Un programa que navegue por una red como ésta puede reconocer las <br>
+                distintas unidades de información, obtener datos específicos o razonar sobre relaciones <br>
+                complejas. A partir de aquí sí podemos distinguir entre un cuadro pintado por un artista y <br>
+                un retrato de un artista. <br>
+            </section>
+            <section>
+                Por último, la web no solamente proporciona acceso a contenidos sino que también <br>
+                ofrece interacción y servicios (comprar un libro, reservar una plaza en un vuelo, hacer <br>
+                una transferencia bancaria, simular una hipoteca). Los servicios web semánticos son una <br>
+                línea importante de la web semántica, que propone describir no sólo información sino <br>
+                definir ontologías de funcionalidad y procedimientos para describir servicios web: sus <br>
+                entradas y salidas, las condiciones necesarias para que se puedan ejecutar, los efectos que <br>
+                producen, o los pasos a seguir cuando se trata de un servicio compuesto. Estas <br>
+                descripciones procesables por máquinas permitirían automatizar el descubrimiento, la <br>
+                composición, y la ejecución de servicios, así como la comunicación entre unos y otros. <br>
+            </section>
+        </article>
+
+        <article style="display: grid; justify-self: center; width: 85%; place-items: center;">
+            <section>
+                <h3>Tecnologías para la web semántica </h3>
+                La tecnología que se ha creado para hacer posible la web semántica incluye lenguajes <br>
+                para la representación de ontologías, parsers, lenguajes de consulta, entornos de <br>
+                desarrollo, módulos de gestión (almacenamiento, acceso, actualización) de ontologías, <br>
+                módulos de visualización, conversión de ontologías, y otras herramientas y librerías. <br>
+                El primer lenguaje para la construcción de la web semántica fue SHOE<sup>15</sup>, creado por Jim <br>
+                Hendler en la Universidad de Maryland en 1997. Desde entonces se han definido otros <br>
+                lenguajes y estándares con finalidad similar, como XML, RDF <sup>16</sup>, DAML+OIL <sup>17</sup>, y más <br>
+                recientemente OWL <sup>18</sup>, por citar los más importantes. <br>
+                XML representa una primera aproximación a la web semántica, y aunque no está <br>
+                expresamente pensado para definir ontologías, es el estándar más extendido hoy día en <br>
+                las aplicaciones de esta línea pre- web semántica. XML permite estructurar datos y <br>
+                documentos en forma de árboles de etiquetas con atributos. Con XML Schema (XMLS) <sup>19</sup><br>
+                se pueden acordar de antemano las estructuras que se van a utilizar, así como manejar <br>
+                tipos de datos primitivos y derivados. Con el estándar XSLT <sup>20</sup> se pueden definir plantillas <br>
+                asociadas a las estructuras XML, que describen cómo generar código HTML para <br>
+                visualizar los contenidos en un navegador. Parsers como DOM <sup>21</sup> permiten moverse por <br>
+                las estructuras XML desde un programa Java o C++, y existen multitud de herramientas <br>
+                para facilitar la compatibilidad de XML con bases de datos, JavaBeans <sup>22</sup>, etc. <br>
+                Desde la aparición de XML en 1998, se han definido multitud de estándares para <br>
+                modelizar información en dominios específicos como las finanzas [Coates 2001] (XBRL, <br>                        
+                RIXML, FpXML, ebXML, etc.), el periodismo <sup>23</sup> (p.e. NewsML, XMLNews, PRISM) <sup>24</sup>, <br>
+                la enseñanza (SCORM, <sup>25</sup> IEEE LOM <sup>26</sup> y otros), o la medicina [Dudek 2001] (NLM <br>
+                Medline, SCIPHOX, CDA, etc.), entre otros muchos campos. XML es un primer paso en <br>
+                la dirección de avanzar hacia una representación explícita de los datos y la estructura de <br>
+                los contenidos de la web, separada de su presentación en HTML. XML proporciona una <br>
+                sintaxis para hacerlo posible, pero ofrece una capacidad limitada para expresar la <br>
+                semántica. El modelo de datos XML consiste en un árbol que no distingue entre objetos y <br>
+                relaciones, ni tiene noción de jerarquía de clases. <br>
+                <hr>
+                <div>
+                    <sup>15</sup><a href="http://www.cs.umd.edu/projects/plus/SHOE/">http://www.cs.umd.edu/projects/plus/SHOE</a><br>
+                    <sup>16</sup><a href="http://www.w3.org/RDF/">http://www.w3.org/RDF</a><br>
+                    <sup>17</sup><a href="http://www.w3.org/TR/daml+oil-reference/">http://www.w3.org/TR/daml+oil-reference</a><br>
+                    <sup>18</sup><a href="http://www.w3.org/2001/sw/WebOnt/">http://www.w3.org/2001/sw/WebOnt</a><br>
+                    <sup>19</sup><a href="http://www.w3.org/XML/Schema/">http://www.w3.org/XML/Schema</a><br>
+                    <sup>20</sup><a href="http://www.w3.org/Style/XSL/">http://www.w3.org/Style/XSL</a><br>
+                    <sup>21</sup><a href="http://www.w3.org/DOM/">http://www.w3.org/DOM</a><br>
+                    <sup>22</sup><a href="http://java.sun.com/products/javabeans/">http://java.sun.com/products/javabeans</a><br>
+                    <sup>22</sup><a href="http://www.iptc.org/">http://www.iptc.org</a><br>
+                    <sup>22</sup><a href="http://www.prismstandard.org/">http://www.prismstandard.org</a><br>
+                    <sup>22</sup><a href="http://www.adlnet.org/">http://www.adlnet.org</a><br>
+                    <sup>22</sup><a href="http://ltsc.ieee.org/wg12/">http://ltsc.ieee.org/wg12</a><br><br>
+                </div>
+            </section>
+        </article>
+
+    </main>
+</body>
+</html>
