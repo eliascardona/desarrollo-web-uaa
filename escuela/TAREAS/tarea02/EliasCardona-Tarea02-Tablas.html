@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--  Elias Eduardo Cardona Rodr&iacute;guez  -->
+<!--  Licenciatura en Informática y Tecnolog&iacute;as Computacionales  -->
+<!--  SEMESTRE:  4°A  -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <title>Construyendo aplicaciones web con una metodolog&iacute;a de diseño orientada a objetos</title>
+</head>
+<body>
+    <main>
+        <article>
+            <section style="display: grid; width: 96%; place-items: center; margin-bottom: 4em;">
+                <div style="display: grid; place-items: center;">
+                    <h1>Construyendo aplicaciones web con una metodolog&iacute;a de diseño orientada a objetos</h1>
+                    <div style="display: grid;">
+                        <div>
+                            <span>
+                                Dar&iacute;o Andr&eacute;s Silva*
+                            </span>
+                            <span>
+                                B&aacute;rbara Mercerat*
+                            </span>
+                        </div>
+                    </div>
+                    <h3>Resumen</h3>
+                    <span>
+                        El presente art&iacute;culo tiene como principal objetivo mostrar las ventajas del uso de una metodolog&iacute;a <br>
+                        de diseño orientada a objetos para desarrollar aplicaciones web. Existen en la actualidad tecnolog&iacute;as <br>
+                        que permiten un r&aacute;pido desarrollo de aplicaciones poco reusables y dif&iacute;ciles de mantener. La metodolog&iacute;a <br>
+                        propuesta en este art&iacute;culo, aplicada con las tecnolog&iacute;as brevemente descritas, permite obtener aplicaciones <br>
+                        mediante un proceso de desarrollo en capas, aprovechando al m&aacute;ximo la potencia de la programaci&oacute;n orientada <br>
+                        a objetos. <br><br>
+                        <strong>Palabras claves: </strong>
+                        Aplicaciones web, tecnolog&iacute;as de desarrollo, programaci&oacute;n orientada a objetos, diseño en capas, <br>
+                        contenido din&aacute;mico, patrones de diseño.
+                        <h4>Abstract</h4>
+                        The main goal of this paper is to show the advantages of using an object oriented design method to develop web <br>
+                        applications. Nowadays, there are technologies that allow a fast development of applications with a poor level of <br>
+                        reuse and very difficult to maintain. The method proposed in this paper, applied with the briefly described technologies, <br>
+                        allows the developers to obtain applications in a layered development process, taking advantages of the power of object <br>
+                        oriented programming. <br><br>
+                        <strong>Keywords: </strong>
+                        Web applications, development technologies, object oriented programming, layered design, <br>
+                        dynamic content, design patterns. <br>                    
+                    </span>
+                </div>
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <div>
+                    <h2 style="padding-left: 8em;"> 1 Introducci&oacute;n </h2>
+                    <p>
+                        <pre>
+                            El desarrollo de aplicaciones web involucra decisiones no triviales de diseño e implementaci&oacute;n que
+                            inevitablemente influyen en todo el proceso de desarrollo, afectando la divisi&oacute;n de tareas. Los problemas
+                            involucrados, como el diseño del modelo del dominio y la construcci&oacute;n de la interfaz de usuario, tienen
+                            requerimientos disjuntos que deben ser tratados por separado.
+                            El alcance de la aplicaci&oacute;n y el tipo de usuarios a los que estar&aacute; dirigida son consideraciones tan importantes 
+                            como las tecnolog&iacute;as elegidas para realizar la implementaci&oacute;n. As&iacute; como las tecnolog&iacute;as pueden limitar la
+                            funcionalidad de la aplicaci&oacute;n, decisiones de diseño equivocadas tambi&eacute;n pueden reducir su capacidad de
+                            lextensi&oacute;n y reusabilidad. Es por ello que el uso de una metodolog&iacute;a de diseño y de tecnolog&iacute;as que se
+                            adapten naturalmente a &eacute;sta, son de vital importancia para el desarrollo de aplicaciones complejas.
+                        </pre>
+                    </p>
+                    <p>
+                        <pre>
+                            LIFIA, Laboratorio de Investigaci&oacute;n y Formaci&oacute;n en Inform&aacute;tica Avanzada. Facultad de Inform&aacute;tica, Universidad 
+                            Nacional de La Plata. Calle 50 esq. 115 (1900), La Plata, Provincia de Buenos Aires, Rep&uacute;blica Argentina.
+                            {dsilva,bmercerat}@lifia.info.unlp.edu.ar
+                            
+                            Existen en la actualidad tecnolog&iacute;as ampliamente usadas para el desarrollo de aplicaciones web, pero muchas
+                            de ellas obligan al desarrollador a mezclar aspectos conceptuales y de presentaci&oacute;n. Esto sucede
+                            principalmente con aquellas tecnolog&iacute;as no basadas en objetos, y por esta raz&oacute;n no ser&aacute;n mencionadas en este
+                            art&iacute;culo.
+                            La elecci&oacute;n de tecnolog&iacute;as complejas demora el proceso e incrementa los costos, pero en ocasiones permite
+                            adecuarse a metodolog&iacute;as de diseño m&aacute;s f&aacute;cilmente. Tal es el caso de las tecnolog&iacute;as orientadas a objetos, las 
+                            cuales tienden a demorar el desarrollo en etapas tempranas. El tiempo de desarrollo en la actualidad es cr&iacute;tico, 
+                            tanto por razones de marketing como por l&iacute;mites en el presupuesto y los recursos [1], pero la adopci&oacute;n de
+                            estas tecnolog&iacute;as hace que el mantenimiento se transforme en una actividad m&aacute;s simple, la divisi&oacute;n en capas
+                            sea tarea natural del desarrollo y el tiempo invertido en el diseño facilite el trabajo necesario para el resto de
+                            las actividades.
+                            El objetivo de este art&iacute;culo es presentar una metodolog&iacute;a de diseño de aplicaciones web, y mostrar por medio 
+                            de un ejemplo su implementaci&oacute;n con las tecnolog&iacute;as adecuadas para cada capa de diseño.
+                            En la siguiente secci&oacute;n se presenta una introducci&oacute;n a las aplicaciones web en general, haciendo hincapi&eacute; en
+                            la importancia del diseño en capas y en la programaci&oacute;n orientada a objetos como herramienta de desarrollo. 
+                            En la secci&oacute;n 3 se describe c&oacute;mo realizar el diseño de las aplicaciones web, qu&eacute; capas involucra y en qu&eacute; 
+                            consisten cada una de ellas. Se introduce para ello a OOHDM (M&eacute;todo de Diseño Hipermedia Orientado a
+                            Objetos1
+                            ) [2], una metodolog&iacute;a de diseño de aplicaciones hipermedia, y en particular de aplicaciones web.
+                            En la secci&oacute;n 4 se describen las caracter&iacute;sticas sobresalientes de las tecnolog&iacute;as sugeridas para la
+                            implementaci&oacute;n de una aplicaci&oacute;n concreta construida con la metodolog&iacute;a. 
+                            En la secci&oacute;n 5 se presenta una idea de implementaci&oacute;n basada en un ejemplo simple, utilizando las
+                            tecnolog&iacute;as sugeridas, en funci&oacute;n de los requerimientos de cada capa de diseño.
+                            Finalmente, se resumen conclusiones sobre el uso conjunto de la metodolog&iacute;a y las tecnolog&iacute;as elegidas.                         
+                        </pre>
+                    </p>
+                </div>                    
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">2 Aplicaciones web y la importancia del desarrollo en capas</h2>
+                <p>
+                    <pre>
+                        Las aplicaciones hipermedia han evolucionado en los &uacute;ltimos años y se han concentrado mayormente en la
+                        web. Las antiguas aplicaciones distribuidas en cd’s dieron lugar a aplicaciones din&aacute;micas, de constante
+                        actualizaci&oacute;n e incluso personalizables, capaces de adaptarse a los tipos de usuarios y en casos avanzados, a
+                        cada usuario en particular. Estas caracter&iacute;sticas encuentran el medio ideal en la web, ya que de otra forma
+                        ser&iacute;a costoso su mantenimiento y evoluci&oacute;n.
+                        La complejidad del desarrollo [3] ocurre a diferentes niveles: dominios de aplicaci&oacute;n sofisticados
+                        (financieros, m&eacute;dicos, geogr&aacute;ficos, etc.); la necesidad de proveer acceso de navegaci&oacute;n simple a grandes
+                        cantidades de datos multimediales, y por &uacute;ltimo la aparici&oacute;n de nuevos dispositivos para los cuales se deben 
+                        construir interfaces web f&aacute;ciles de usar. Esta complejidad en los desarrollos de software s&oacute;lo puede ser
+                        alcanzada mediante la separaci&oacute;n de los asuntos de modelizaci&oacute;n en forma clara y modular.
+                        La metodolog&iacute;a OOHDM [4], presentada en la pr&oacute;xima secci&oacute;n, ha sido utilizada para diseñar diferentes tipos 
+                        de aplicaciones hipermedia como galer&iacute;as interactivas, presentaciones multimedia y como veremos en este
+                        art&iacute;culo, aplicaciones web. El &eacute;xito de esta metodolog&iacute;a es la clara identificaci&oacute;n de los tres diferentes niveles 
+                        de diseño en forma independiente de la implementaci&oacute;n.
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        1Object Oriented Hypermedia Design Method
+                        La justificaci&oacute;n de tanto trabajo puede encontrarse en cualquier aplicaci&oacute;n que requiera navegaci&oacute;n: en
+                        t&eacute;rminos de programaci&oacute;n orientada a objetos, si los elementos por los que se navega son los del diseño
+                        conceptual se estar&iacute;a mezclando la funcionalidad hipermedia con el comportamiento propio del objeto. Por
+                        otro lado, si los nodos de la red de navegaci&oacute;n tienen la capacidad de definir su apariencia, se estar&iacute;a 
+                        limitando la extensi&oacute;n de la aplicaci&oacute;n para ofrecer nuevas presentaciones del mismo elemento y
+                        eventualmente se estar&iacute;a dificultando la personalizaci&oacute;n de la interfaz.
+                        Es necesario, entonces, mantener separadas las distintas decisiones de diseño seg&uacute;n su naturaleza (conceptual, 
+                        navegacional, de interfaz) y aplicar las tecnolog&iacute;as adecuadas a cada capa en el proceso de implementaci&oacute;n.
+                        Esta idea de desarrollo ser&aacute; discutida en detalle en el resto del art&iacute;culo, donde con ayuda de un ejemplo
+                        concreto se podr&aacute; apreciar con claridad la real importancia del uso de una metodolog&iacute;a de diseño.
+                    </pre>
+                </p>
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">3 Introducci&oacute;n a OOHDM</h2>
+                <p>
+                    <pre>
+                        Las metodolog&iacute;as tradicionales de ingenier&iacute;a de software, o las metodolog&iacute;as para sistemas de desarrollo de
+                        informaci&oacute;n, no contienen una buena abstracci&oacute;n capaz de facilitar la tarea de especificar aplicaciones
+                        hipermedia. El tamaño, la complejidad y el n&uacute;mero de aplicaciones crecen en forma acelerada en la
+                        actualidad, por lo cual una metodolog&iacute;a de diseño sistem&aacute;tica es necesaria para disminuir la complejidad y 
+                        admitir evoluci&oacute;n y reusabilidad.
+                        Producir aplicaciones en las cuales el usuario pueda aprovechar el potencial del paradigma de la navegaci&oacute;n
+                        de sitios web, mientras ejecuta transacciones sobre bases de informaci&oacute;n, es una tarea muy dif&iacute;cil de lograr.
+                        En primer lugar, la navegaci&oacute;n posee algunos problemas. Una estructura de navegaci&oacute;n robusta es una de las
+                        claves del &eacute;xito en las aplicaciones hipermedia. Si el usuario entiende d&oacute;nde puede ir y c&oacute;mo llegar al lugar
+                        deseado, es una buena señal de que la aplicaci&oacute;n ha sido bien diseñada.
+                        Construir la interfaz de una aplicaci&oacute;n web es tambi&eacute;n una tarea compleja; no s&oacute;lo se necesita especificar
+                        cu&aacute;les son los objetos de la interfaz que deber&iacute;an ser implementados, sino tambi&eacute;n la manera en la cual estos 
+                        objetos interactuar&aacute;n con el resto de la aplicaci&oacute;n.
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        En hipermedia existen requerimientos que deben ser satisfechos en un entorno de desarrollo unificado 2. Por
+                        un lado, la navegaci&oacute;n y el comportamiento funcional de la aplicaci&oacute;n deber&iacute;an ser integrados. Por otro lado, 
+                        durante el proceso de diseño se deber&iacute;a poder desacoplar las decisiones de diseño relacionadas con la
+                        estructura navegacional de la aplicaci&oacute;n, de aquellas relacionadas con el modelo del dominio.
+                        OOHDM propone el desarrollo de aplicaciones hipermedia a trav&eacute;s de un proceso compuesto por cuatro
+                        etapas: diseño conceptual, diseño navegacional, diseño de interfaces abstractas e implementaci&oacute;n.
+                    </pre>
+                </p>
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">
+                    3.1 Diseño Conceptual
+                </h2>
+                <p>
+                    <pre>
+                        Durante esta actividad se construye un esquema conceptual representado por los objetos del dominio, las
+                        relaciones y colaboraciones existentes establecidas entre ellos. En las aplicaciones hipermedia
+                        convencionales, cuyos componentes de hipermedia no son modificados durante la ejecuci&oacute;n, se podr&iacute;a usar un
+                        modelo de datos sem&aacute;ntico estructural (como el modelo de entidades y relaciones). De este modo, en los
+                        casos en que la informaci&oacute;n base pueda cambiar din&aacute;micamente o se intenten ejecutar c&aacute;lculos complejos, se
+                        necesitar&aacute; enriquecer el comportamiento del modelo de objetos.
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        2 framework En OOHDM, el esquema conceptual est&aacute; construido por clases, relaciones y subsistemas. Las clases son
+                        descritas como en los modelos orientados a objetos tradicionales. Sin embargo, los atributos pueden ser de
+                        m&uacute;ltiples tipos para representar perspectivas diferentes de las mismas entidades del mundo real.
+                        Se usa notaci&oacute;n similar a UML (Lenguaje de Modelado Unificado3
+                        ) y tarjetas de clases y relaciones similares 
+                        a las tarjetas CRC (Clase Responsabilidad Colaboraci&oacute;n4
+                        ). El esquema de las clases consiste en un conjunto 
+                        de clases conectadas por relaciones. Los objetos son instancias de las clases. Las clases son usadas durante el
+                        diseño navegacional para derivar nodos, y las relaciones que son usadas para construir enlaces.
+                    </pre>
+                </p>
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">
+                    3.2 Diseño Navegacional
+                </h2>
+                <p>
+                    <pre>
+                        La primera generaci&oacute;n de aplicaciones web fue pensada para realizar navegaci&oacute;n a trav&eacute;s del espacio de
+                        informaci&oacute;n, utilizando un simple modelo de datos de hipermedia. En OOHDM, la navegaci&oacute;n es considerada
+                        un paso cr&iacute;tico en el diseño aplicaciones. Un modelo navegacional es construido como una vista sobre un
+                        diseño conceptual, admitiendo la construcci&oacute;n de modelos diferentes de acuerdo con los diferentes perfiles de
+                        usuarios. Cada modelo navegacional provee una vista subjetiva del diseño conceptual.
+                        El diseño de navegaci&oacute;n es expresado en dos esquemas: el esquema de clases navegacionales y el esquema de
+                        contextos navegacionales. En OOHDM existe un conjunto de tipos predefinidos de clases navegacionales:
+                        nodos, enlaces y estructuras de acceso. La sem&aacute;ntica de los nodos y los enlaces son las tradicionales de las 
+                        aplicaciones hipermedia, y las estructuras de acceso, tales como &iacute;ndices o recorridos guiados, representan los
+                        posibles caminos de acceso a los nodos.
+                        La principal estructura primitiva del espacio navegacional es la noci&oacute;n de contexto navegacional. Un contexto
+                        navegacional es un conjunto de nodos, enlaces, clases de contextos, y otros contextos navegacionales
+                        (contextos anidados). Pueden ser definidos por comprensi&oacute;n o extensi&oacute;n, o por enumeraci&oacute;n de sus miembros. 
+                        Los contextos navegacionales juegan un rol similar a las colecciones y fueron inspirados sobre el concepto de
+                        contextos anidados. Organizan el espacio navegacional en conjuntos convenientes que pueden ser recorridos
+                        en un orden particular y que deber&iacute;an ser definidos como caminos para ayudar al usuario a lograr la tarea
+                        deseada.
+                        Los nodos son enriquecidos con un conjunto de clases especiales que permiten de un nodo observar y
+                        presentar atributos (incluidos las anclas), as&iacute; como m&eacute;todos (comportamiento) cuando se navega en un
+                        particular contexto. 
+                        3.3 Diseño de Interfaz Abstracta
+                        Una vez que las estructuras navegacionales son definidas, se deben especificar los aspectos de interfaz. Esto
+                        significa definir la forma en la cual los objetos navegacionales pueden aparecer, c&oacute;mo los objetos de interfaz
+                        activar&aacute;n la navegaci&oacute;n y el resto de la funcionalidad de la aplicaci&oacute;n, qu&eacute; transformaciones de la interfaz son 
+                        pertinentes y cu&aacute;ndo es necesario realizarlas.
+                    </pre>
+                </p>
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">
+                    3 Unified Modeling Language
+                </h2>
+                <p>
+                    <pre>
+                        4 Class Responsibility Collaboration. Una clara separaci&oacute;n entre diseño navegacional y diseño de interfaz abstracta permite construir diferentes
+                        interfaces para el mismo modelo navegacional, dejando un alto grado de independencia de la tecnolog&iacute;a de
+                        interfaz de usuario. 
+                        El aspecto de la interfaz de usuario de aplicaciones interactivas (en particular las aplicaciones web) es un
+                        punto cr&iacute;tico en el desarrollo que las modernas metodolog&iacute;as tienden a descuidar. En OOHDM se utiliza el
+                        diseño de interfaz abstracta para describir la interfaz del usuario de la aplicaci&oacute;n de hipermedia.
+                        El modelo de interfaz ADVs (Vista de Datos Abstracta5) [5] especifica la organizaci&oacute;n y comportamiento de
+                        la interfaz, pero la apariencia f&iacute;sica real o de los atributos, y la disposici&oacute;n de las propiedades de las ADVs en 
+                        la pantalla real son hechas en la fase de implementaci&oacute;n. 
+                        <h3 style="padding-left: 8em;"> 3.4 Implementaci&oacute;n </h3>
+                        En esta fase, el diseñador debe implementar el diseño. Hasta ahora, todos los modelos fueron construidos en
+                        forma independiente de la plataforma de implementaci&oacute;n; en esta fase es tenido en cuenta el entorno
+                        particular en el cual se va a correr la aplicaci&oacute;n.
+                        Al llegar a esta fase, el primer paso que debe realizar el diseñador es definir los &iacute;tems de informaci&oacute;n que son 
+                        parte del dominio del problema. Debe identificar tambi&eacute;n, c&oacute;mo son organizados los &iacute;tems de acuerdo con el
+                        perfil del usuario y su tarea; decidir qu&eacute; interfaz deber&iacute;a ver y c&oacute;mo deber&iacute;a comportarse. A fin de
+                        implementar todo en un entorno web, el diseñador debe decidir adem&aacute;s qu&eacute; informaci&oacute;n debe ser almacenada.
+                    </pre>
+                </p>
+            </section>
+            
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">
+                    4 Comparaci&oacute;n de OOHDM con otras metodolog&iacute;as
+                </h2>
+                <p>
+                    <pre>
+                        La comparaci&oacute;n de m&eacute;todos de desarrollo de sistemas de software es una tarea dif&iacute;cil [6]. El foco de
+                        cada metodolog&iacute;a puede ser diferente, algunas tratan de concentrarse en varios aspectos del proceso de
+                        desarrollo, otras tratan de detallar en profundidad alg&uacute;n aspecto en particular. En la Tabla 1 se presenta una
+                        comparaci&oacute;n de distintas metodolog&iacute;as extra&iacute;da de [6], teniendo en cuenta los pasos que componen el
+                        proceso, la t&eacute;cnica de modelado, la representaci&oacute;n gr&aacute;fica, la notaci&oacute;n elegida para los modelos y la
+                        herramienta CASE de soporte proporcionada para el desarrollo. Las metodolog&iacute;as comparadas son:
+                        HDM (M&eacute;todo de Diseño Hipermedia6 ) [7], RMM (Metodolog&iacute;a de Administraci&oacute;n de Relaciones7 ) [8],
+                        EORM (Metodolog&iacute;a de Relaciones de Objetos Mejorada8 ) [9],
+                        OOHDM, SOHDM (Metodolog&iacute;a de Diseño Hipermedia orientada a objetos y basada en escenarios9 ) [10],
+                        WSDM (M&eacute;todo de Diseño de Sitios Web10) [11], y WAE-Proceso Conallen (Extensi&oacute;n de Aplicaci&oacute;n Web para UML11) [12].
+                    </pre>
+                </p>                
+            </section>
+
+            <!-- secci&oacute;n con tabla -->
+            <section style="display: grid; width: 96%; place-items: center; padding: 2em 0;">
+                <div>
+                    <table style="border: solid 1px #000;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    ref.
+                                </th>
+                                <th>
+                                    proceso
+                                </th>
+                                <th>
+                                    t&eacute;cnica de modelado
+                                </th>
+                                <th>
+                                    representaci&oacute;n gr&aacute;fica
+                                </th>
+                                <th>
+                                    notaci&oacute;n
+                                </th>
+                                <th>
+                                    herramienta de soporte
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>HDM</td>
+                                <td>1.Desarrollo a largo plazo
+                                    2.Desarrollo a corto plazo</td>
+                                <td>E-R</td>
+                                <td>1.-2.Diagrama E-R</td>
+                                <td>1.E-R</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>RMM</td>
+                                <td>1.Diseño E-R
+                                    2.Diseño Slice13
+                                    3.Diseño de navegaci&oacute;n
+                                    4.Diseño de protocolo de conversi&oacute;n
+                                    5.Diseño de UI14
+                                    6.Diseño de comportamiento en tiempo de 
+                                    ejecuci&oacute;n
+                                    7.Prueba y construcci&oacute;n</td>
+                                <td>E-R</td>
+                                <td>1.Diagrama E-R
+                                    2.Diagrama Slice
+                                    3.Diagrama RMDM15</td>
+                                <td>1.E-R
+                                    2.3.Propio</td>
+                                <td>RMCase</td>
+                            </tr>
+                            <tr>
+                                <td>EORM</td>
+                                <td>1.Clases del entorno de desarrollo
+                                    2.Composici&oacute;n del entorno de desarrollo
+                                    3.Entorno de desarrollo de UI</td>
+                                <td>OO</td>
+                                <td>1.Diagrama de clases
+                                    2.Diseño GUI17</td>
+                                <td>1. OMT</td>
+                                <td>ONTOS STUDIO</td>
+                            </tr>
+                            <tr>
+                                <td>OOHDM</td>
+                                <td>1.Diseño conceptual
+                                    2.Diseño navegacional
+                                    3.Diseño abstracto de la UI
+                                    4.Implementaci&oacute;n</td>
+                                <td>OO</td>
+                                <td>1.Diagrama de clases
+                                    2.Diagrama 
+                                    navegacional,
+                                    clase + contexto
+                                    3.Diagrama de 
+                                    configuraci&oacute;n de ADV + 
+                                    Diagrama ADV</td>
+                                <td>1.OMT/
+                                    UML19
+                                    2.Propio
+                                    3.ADVs</td>
+                                <td>OOHDM web</td>
+                            </tr>
+                            <tr>
+                                <td>SOHDM</td>
+                                <td>1.An&aacute;lisis del dominio
+                                    2.Modelo en OO
+                                    3.Diseño de la vista
+                                    4.Diseño navegacional
+                                    5.Diseño implementaci&oacute;n
+                                    6.Construcci&oacute;n</td>
+                                <td>
+                                    Escenarios
+                                    Vistas OO
+                                </td>
+                                <td>
+                                    1.Diagramas de 
+                                    escenarios de actividad
+                                    2.Diagrama de estructura 
+                                    de clase
+                                    3.Vista OO
+                                    4.Esquema de enlace 
+                                    navegacional
+                                    5.Esquema de p&aacute;ginas
+                                </td>
+                                <td>1.-5.Prop</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>WSDM</td>
+                                <td>1.Modelado del usuario
+                                    2.Diseño conceptual 
+                                    2.1.Modelo objetos
+                                    2.2.Diseño navegacional
+                                    3.Diseño implementaci&oacute;n
+                                    4.Implementaci&oacute;n</td>
+                                <td>E-R/OO</td>
+                                <td>1.Diagrama de E-R o 
+                                    clase
+                                    2.Capas de navegaci&oacute;n</td>
+                                <td>1.E-R/ 
+                                    OMT
+                                    2.Propio</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>WAE-Proceso 
+                                    Conallen</td>
+                                <td>1.Manejo de proyecto
+                                    2.Captura de requerimientos
+                                    3.An&aacute;lisis
+                                    4.Diseño
+                                    5.Implementaci&oacute;n
+                                    6.Prueba
+                                    7.Desarrollo
+                                    8.Configuraci&oacute;n y manejo de cambios</td>
+                                <td>OO</td>
+                                <td>2.-5.Diagramas UML</td>
+                                <td>UML</td>
+                                <td>Rational Rose</td>                        
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- secci&oacute;n con tabla -->
+            <section style="display: grid; width: 96%; place-items: center; padding: 2em 0;">
+                <div>
+                    <table style="border: solid 1px #000;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    ref.
+                                </th>
+                                <th>
+                                    HDM
+                                </th>
+                                <th>
+                                    RMM
+                                </th>
+                                <th>
+                                    EORM
+                                </th>
+                                <th>
+                                    OOHDM
+                                </th>
+                                <th>
+                                    SOHDM
+                                </th>
+                                <th>
+                                    WSDM
+                                </th>
+                                <th>
+                                    WAE
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>n. concept.</td>
+                                <td>Entidad
+                                    Colecci&oacute;n
+                                    Perspectiva
+                                    Relaciones</td>
+                                <td>entidad
+                                    relaci&oacute;n</td>
+                                <td>clases
+                                    relaci&oacute;n-OO
+                                    -generalizada
+                                    -definida por 
+                                    el usuario</td>
+                                <td>clases
+                                    perspectiva
+                                    relaci&oacute;n-OO</td>
+                                <td>escenarios: 
+                                    -evento
+                                    -actividad
+                                    fujo de 
+                                    actividad</td>
+                                <td>ojeto
+                                    perspectiva
+                                    relaci&oacute;n</td>
+                                <td>case
+                                    relaci&oacute;n-OO</td>
+                            </tr>
+                            <tr>
+                                <td>n. estruct.</td>
+                                <td>Enlace:
+                                    -estructural
+                                    -aplicaci&oacute;n
+                                    -perspectiva
+                                    componente
+                                    nodo
+                                    Estructuras de 
+                                    acceso:
+                                    -enlace 
+                                    colecci&oacute;n
+                                    -enlace &iacute;ndice
+                                    -visita guiada </td>
+                                <td>enlace:
+                                    -unidireccional
+                                    -bidireccional
+                                    Slices
+                                    primitivas de 
+                                    acceso:
+                                    -agrupar 
+                                    (men&uacute;)
+                                    -&iacute;ndice
+                                    -visita guiada
+                                    -visita guiada
+                                    indexada</td>
+                                <td>enlace:
+                                    -simple
+                                    -navegacional
+                                    -nodo a nodo
+                                    -tramo a nodo
+                                    -estructural
+                                    -conjunto
+                                    -lista</td>
+                                <td>enlace
+                                    clase 
+                                    navegacional
+                                    contexto 
+                                    navegacional
+                                    estructuras de 
+                                    acceso:
+                                    -&iacute;ndice
+                                    -visita guiada</td>
+                                <td>enlace
+                                    navegacional
+                                    vista-OO:
+                                    -base
+                                    -asociaci&oacute;n
+                                    -colaboraci&oacute;n
+                                    ASN20:
+                                    -agrupar
+                                    -&iacute;ndice
+                                    -visita guiada</td>
+                                <td>enlace
+                                    componente 
+                                    -navegaci&oacute;n
+                                    -informaci&oacute;n
+                                    -externo
+                                    camino 
+                                    navegacional</td>
+                                <td>enlace
+                                    enlace dirigido
+                                    redirigir
+                                    construir
+                                    enviar
+                                    p&aacute;gina web
+                                    -p&aacute;gina del 
+                                    cliente
+                                    -p&aacute;gina
+                                    del servidor</td>
+                            </tr>
+                            <tr>
+                                <td>n. visible</td>
+                                <td>Ranura
+                                    Marco</td>
+                                <td>Slices</td>
+                                <td>null</td>
+                                <td>ADV
+                                    en contexto</td>
+                                <td>componente 
+                                    UI: 
+                                    -elecci&oacute;n
+                                    -texto de 
+                                    entrada de 
+                                    b&uacute;squeda
+                                    -bot&oacute;n
+                                    -imagen
+                                    -barra de 
+                                    desplazamiento
+                                    - ancla 
+                                    HTML21
+                                    -otros</td>
+                                <td>null</td>
+                                <td>conjunto de 
+                                    marcos
+                                    formulario
+                                    objetivo
+                                    elemento de 
+                                    selecci&oacute;n
+                                    elemento de 
+                                    entrada
+                                    elemento de 
+                                    &aacute;rea de texto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <div>
+                    <h2 style="padding-left: 8em;">5 Revisi&oacute;n de tecnolog&iacute;as para el desarrollo de aplicaciones web</h2>
+                    <p>
+                        <pre>                        
+                            20 Acces Structure Node, Nodo de Estructura de Acceso
+                            21 HyperText Markup Language, Lenguaje de Marcado Hiper-Texto
+                            Cada capa de diseño OOHDM constituye un sector de la aplicaci&oacute;n con objetivos espec&iacute;ficos; las tecnolog&iacute;as 
+                            aplicadas en cada uno de ellos deben ser capaces de satisfacer sus requerimientos y de acoplarse f&aacute;cilmente a
+                            las tecnolog&iacute;as asociadas a las capas restantes.
+                            En esta secci&oacute;n se presentar&aacute;n las tecnolog&iacute;as b&aacute;sicas para llevar a cabo la implementaci&oacute;n de aplicaciones
+                            construidas con OOHDM. Se opt&oacute; por tecnolog&iacute;as orientadas a objetos, no s&oacute;lo para facilitar el traslado
+                            (explicado en detalle en la Secci&oacute;n 5), sino para aprovechar al m&aacute;ximo la expresividad lograda en los distintos 
+                            diseños.
+                        </pre>
+                    </p>                
+                    <h3 style="padding-left: 8em;">5.1 Lenguaje Java</h3>
+                    <p>
+                        <pre>
+                            Java es un lenguaje de programaci&oacute;n orientado a objetos desarrollado por la compañ&iacute;a Sun Microsystems
+                            [13]. Est&aacute; construido a partir de lenguajes orientados a objetos anteriores, como C++, pero no pretende ser
+                            compatible con ellos sino ir mucho m&aacute;s lejos, añadiendo nuevas caracter&iacute;sticas como recolecci&oacute;n de basura,
+                            programaci&oacute;n multihilos y manejo de memoria a cargo del lenguaje.
+                            Java fue diseñado para que la ejecuci&oacute;n de c&oacute;digo a trav&eacute;s de la red fuera segura, para lo cual fue necesario 
+                            deshacerse de herramientas de C tales como los punteros. Tambi&eacute;n se han eliminado aspectos que
+                            demostraron ser mejores en la teor&iacute;a que en la pr&aacute;ctica, tales como sobrecarga de operadores, que por cierto 
+                            todav&iacute;a est&aacute; en discusi&oacute;n, y herencia m&uacute;ltiple.
+                            La portabilidad fue otra de las claves para el desarrollo de Java, para lograr que las aplicaciones se escriban 
+                            una sola vez sin la necesidad de modificarlas para que corran en diferentes plataformas. Esta independencia se
+                            alcanza tanto a nivel de c&oacute;digo fuente (similar a C++) como a nivel de c&oacute;digo binario. La soluci&oacute;n adoptada
+                            fue compilar el c&oacute;digo fuente para generar un c&oacute;digo intermedio (bytecodes) igual para cualquier plataforma.
+                            La JVM (M&aacute;quina Virtual de Java22), donde reside el int&eacute;rprete Java, s&oacute;lo tiene que interpretarlos. 
+                        </pre>
+                    </p>
+                    <h3 style="padding-left: 8em;">5.2 Java DataBase Connectivity</h3>
+                    <p>
+                        <pre>
+                            JDBC (Conectividad de Base de Datos) es una interfaz que provee comunicaci&oacute;n con bases de datos. Consiste
+                            de un conjunto de clases e interfaces escritas en Java [14], que proveen una API (Interfaz de Programaci&oacute;n de 
+                            Aplicaci&oacute;n23) est&aacute;ndar para desarrolladores de herramientas de base de datos, permitiendo independizar la
+                            aplicaci&oacute;n de la base de datos que utiliza.
+                            La API JDBC es la interfaz natural a las abstracciones y conceptos b&aacute;sicos de SQL (Lenguaje de Consultas
+                            Simple24): permite crear conexiones, ejecutar sentencias SQL y manipular los resultados obtenidos.
+                            Conceptualmente es similar a ODBC (Conectividad de Base de Datos Abierta25), pero &eacute;sta no es apropiada
+                            para usar directamente desde Java porque usa una interfaz en C y una traducci&oacute;n literal de C a Java no es 
+                            deseable.
+                            JDBC soporta dos modelos de acceso a base de datos: modelo de dos capas26 y modelo de tres capas27[14]. En 
+                            el primer caso, la aplicaci&oacute;n Java se comunica directamente con la base de datos mediante un controlador
+                            JDBC espec&iacute;fico para cada DBMS (Sistema de Administraci&oacute;n de Base de Datos28) que se desee manipular. 
+                            
+                            22 Java Virtual Machine
+                            23 Application Programming Interface
+                            24 Simple Query Language
+                            25 Open Database Connectivity
+                            26 two - tier
+                            27 three - tier
+                            28 DataBase Management System
+
+
+                            En el segundo caso, los comandos son enviados a un capa intermedia29 de servicios, encargado de reenviar las 
+                            sentencias SQL a la base de datos.
+                            Existe un controlador, llamado puente JDBC-ODBC, que implementa las operaciones de JDBC
+                            traduci&eacute;ndolas en operaciones ODBC, con lo cual se provee acceso a cualquier base de datos cuyo
+                            controlador ODBC se encuentre disponible.
+
+                        </pre>
+                    </p>
+                    <h3 style="padding-left: 8em;">5.3 Servlets</h3>
+                    <p>
+                        <pre>
+                            Un servlet es una clase Java [15], embebida dentro del web server, y utilizada para extender la capacidad del 
+                            servidor. La API de servlets provee clases e interfaces para responder a cualquier tipo de requerimientos; en 
+                            particular, para las aplicaciones que corren en servidores web, la API define clases de servlet espec&iacute;ficas para
+                            requerimientos HTTP.
+                            No necesitan ser ejecutados como nuevos procesos dado que corren directamente en el web server. Viven
+                            entre sesiones y se puede decir que son persistentes: no es necesario crear un servlet por cada requerimiento 
+                            realizado desde el cliente, sino que corren dentro de &eacute;ste m&uacute;ltiples hilos. 
+                            Los servlets [16] son programas Java que proveen la funcionalidad de generar din&aacute;micamente contenidos
+                            Web. Pueden ser ejecutados a trav&eacute;s de una l&iacute;nea de comando. A diferencia de los applets, no poseen
+                            restricciones en cuanto a seguridad. Tienen las propiedades de cualquier aplicaci&oacute;n Java y pueden acceder a
+                            los archivos del servidor para escribir y leer, cargar clases, cambiar propiedades del sistema, etc. Del mismo
+                            modo que las aplicaciones de programas Java, los servlets est&aacute;n restringidos por los permisos del sistema. 
+                            Son cargados la primera vez que son usados, y permanecen en memoria para satisfacer futuros
+                            requerimientos. Tiene un m&eacute;todo init, donde el programador puede inicializar el estado del servlet, y un
+                            m&eacute;todo destroy para administrar los recursos que son mantenidos por el servlet. 
+                        </pre>
+                    </p>
+                    <h3 style="padding-left: 8em;">5.4 Java Server Pages</h3>
+                    <p>
+                        <pre>
+                            JSP (P&aacute;ginas de Servidor Java30) provee a los desarrolladores de web de un entorno de desarrollo para crear 
+                            contenidos din&aacute;micos en el servidor usando plantillas31 HTML y XML (Lenguaje de Marcado Extensible32), 
+                            en c&oacute;digo Java, encapsulando la l&oacute;gica que genera el contenido de las p&aacute;ginas [17].
+                            Cuando se ejecuta una p&aacute;gina JSP es traducida a una clase de Java, la cual es compilada para obtener un
+                            servlet. Esta fase de traducci&oacute;n y compilaci&oacute;n ocurre solamente cuando el archivo JSP es llamado la primera
+                            vez, o despu&eacute;s de que ocurran cambios.
+                            JSP y XML tienen un interesante relaci&oacute;n, descrito en [18]. As&iacute; como pueden generarse p&aacute;ginas HTML
+                            din&aacute;micas a partir de una fuente en JSP, pueden generarse din&aacute;micamente en forma an&aacute;loga documentos
+                            XML. M&aacute;s adelante, en la secci&oacute;n de implementaci&oacute;n de este art&iacute;culo, podr&aacute; observarse un ejemplo concreto 
+                            de generaci&oacute;n de contenido XML a partir de p&aacute;ginas JSP.
+                            
+                            29 middle tier
+                            30 Java Server Pages
+                            31 templates
+                            32 Extensible Markup Language
+                        </pre>
+                    </p>
+                    <br>
+                    <h3 style="padding-left: 8em;">5.5 eXtensible Markup Language</h3>
+                    <p>
+                        <pre>
+                            La familia XML es un conjunto de especificaciones que conforman el est&aacute;ndar que define las caracter&iacute;sticas
+                            de un mecanismo independiente de plataformas desarrollado para compartir datos. Se puede considerar a
+                            XML como un formato de transferencia de datos multi-plataforma. Es un subconjunto de SGML (Lenguaje de
+                            Marcado Generalizado Standard33) y uno de sus objetivos es permitir que SGML gen&eacute;rico pueda ser servido,
+                            recibido y procesado en la web de la misma manera que actualmente es posible con HTML.
+                            XML ha sido diseñado de tal manera que sea f&aacute;cil de implementar. No ha nacido s&oacute;lo para su aplicaci&oacute;n en 
+                            Internet, sino que se propone como lenguaje de bajo nivel (a nivel de aplicaci&oacute;n, no de programaci&oacute;n) para
+                            intercambio de informaci&oacute;n estructurada entre diferentes plataformas.
+                            XML hace uso de etiquetas (&uacute;nicamente para delimitar datos) y atributos, y deja la interpretaci&oacute;n de los datos 
+                            a la aplicaci&oacute;n que los utiliza. Por esta raz&oacute;n se van formando lenguajes a partir del XML, y desde este punto 
+                            de vista XML es un metalenguaje. 
+                            El conjunto de reglas o convenciones que impone la especificaci&oacute;n XML permite diseñar formatos de texto
+                            para los datos estructurados, haciendo que se almacenen de manera no ambigua, independiente de la
+                            plataforma y que en el momento de la recuperaci&oacute;n se pueda verificar si la estructura es la correcta. 
+                            Para comprobar que los documentos est&eacute;n bien formados se utiliza un DTD (Definici&oacute;n de Tipo de
+                            Documento34). Se trata de una definici&oacute;n de los elementos que pueden incluirse en el documento XML, la
+                            relaci&oacute;n entre ellos, sus atributos, posibles valores, etc. Es una definici&oacute;n de la gram&aacute;tica del documento, es
+                            decir, cuando se procesa cualquier informaci&oacute;n formateada mediante XML, el primer paso es comprobar si
+                            est&aacute; bien formada, y luego, si incluye o referencia a un DTD, comprobar que sigue sus reglas gramaticales.
+                        </pre>
+                    </p>
+                    <h3 style="padding-left: 8em;">5.6 eXtensible Stylesheet Language</h3>
+                    <p>
+                        <pre>                
+                            XSL (Lenguaje de Hojas de Estilo Extensible) [20] es una especificaci&oacute;n desarrollada dentro del W3C 
+                            (World Wide Web Consortium) para aplicar formato a los documentos XML de forma estandarizada. 
+                            Aunque se ha establecido un modo para que puedan usarse hojas de estilo CSS (Hojas de Estilo en Cascada35) 
+                            dentro de documentos XML, es l&oacute;gico pensar que para aprovechar las caracter&iacute;sticas del nuevo lenguaje hace
+                            falta tener un est&aacute;ndar paralelo y similar asociado a &eacute;l.
+                            Seg&uacute;n el W3C, XSL es "un lenguaje para transformar documentos XML", as&iacute; como un vocabulario XML para
+                            especificar sem&aacute;ntica de formateo de documentos. 
+                            Adem&aacute;s del aspecto que ya inclu&iacute;a CSS referente a la presentaci&oacute;n y estilo de los elementos del documento,
+                            añade una pequeña sintaxis de lenguaje de comandos para poder procesar los documentos XML de forma m&aacute;s 
+                            c&oacute;moda. La XSL permite añadir l&oacute;gica de procesamiento a la hoja de estilo.
+                            La idea es asociar al documento XML con una hoja de estilo y a partir de esto visualizar el documento XML 
+                            en cualquier plataforma: PalmPC, PC, Internet Explorer, Netscape, etc. y con el aspecto (colores, fuentes,
+                            etc) que se quiera utilizar.
+                        </pre>
+                    </p>
+                    <hr>
+                    <p>
+                        <pre>                         
+                            33 Standard Generalized Markup Language
+                            34 Document Type Definition
+                            35 Cascade Style Sheets
+                            36 Formatting Object
+                        </pre>
+                    </p>
+                    <p>
+                        <pre>
+                            En esencia, XSL son dos lenguajes: uno de transformaci&oacute;n y otro de formateo. El lenguaje de transformaci&oacute;n
+                            permite transformar un documento XML en otro con diferente formato, como HTML o texto plano, o bien en 
+                            otro documento XML. El lenguaje de formateo no es m&aacute;s que un vocabulario XML para especificar objetos
+                            de formateo (FO36).                                                 
+                            Al igual que con HTML, se pueden especificar las hojas de estilo, CSS o XSL, dentro del propio documento 
+                            XML o haciendo referencia a ellas en forma externa. Esto es muy &uacute;til para mover datos de una representaci&oacute;n 
+                            XML a otra representaci&oacute;n, basada en correo electr&oacute;nico, intercambio de datos electr&oacute;nicos, intercambio de
+                            metadatos, y alguna aplicaci&oacute;n que necesite convertir datos entre diferentes representaciones de XML a otro
+                            tipo de representaci&oacute;n.
+                            La gran ventaja de utilizar XML y XSL es que los datos y la presentaci&oacute;n de estos quedan en dos archivos 
+                            diferentes.
+                            Existen tres opciones para transformar un documento XML a otro formato, como se describen en [21], tal
+                            como HTML, utilizando hojas de estilo XSL:                                
+                        </pre>
+                        <ul>
+                            <li>
+                                en el cliente: los documentos XML y las hojas de estilo son enviados al cliente (Web Browser), el cual 
+                                se encarga de transformar los documentos bas&aacute;ndose en <br> la especificaci&oacute;n de las hojas de estilo, y luego 
+                                de la transformaci&oacute;n <br> se presentan al usuario en el explorador.
+                            </li>                            
+                            <li>
+                                en el servidor: el servidor es el encargado de aplicar el XSL al documento XML para transformarlo en 
+                                alg&uacute;n otro formato <br> (generalmente HTML) y env&iacute;a el documento transformado al cliente.
+                            </li>                                
+                            <li>
+                                ni en el servidor, ni en el cliente: una tercera opci&oacute;n consiste en transformar el documento original
+                                XML en alg&uacute;n otro formato <br> (usualmente HTML) antes de que el documento sea ubicado en el servidor
+                            </li>                                
+                        </ul>
+                    </p>
+                </div>
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">
+                    6 Trasladando OOHDM a una implementaci&oacute;n
+                </h2>
+                <p>
+                    <pre>
+                        En esta secci&oacute;n se describir&aacute;n las etapas de desarrollo de una aplicaci&oacute;n web simple, siguiendo la metodolog&iacute;a
+                        OOHDM. En cada capa de diseño, la implementaci&oacute;n correspondiente se basa en diferentes tecnolog&iacute;as,
+                        elegidas con el prop&oacute;sito de minimizar la dificultad del desarrollo y aprovechar al m&aacute;ximo las virtudes de la
+                        metodolog&iacute;a.
+                        6.1 Capa Conceptual
+                        En OOHDM, el desarrollo se inicia diseñando la capa conceptual, siendo el principal objetivo de esta etapa
+                        capturar los conceptos involucrados en el dominio de la aplicaci&oacute;n y describirlos en detalle, haciendo uso de
+                        diagramas que permitan expresar con claridad el comportamiento, la estructura y las relaciones entre dichos
+                        conceptos. La Programaci&oacute;n Orientada a Objetos facilita el traslado del diseño conceptual a la
+                        implementaci&oacute;n, proveyendo al programador con herramientas que permiten reducir la distancia entre el
+                        problema del mundo real y la programaci&oacute;n de la soluci&oacute;n en la computadora.
+                        El modelo de objetos del ejemplo a discutir consta de las entidades b&aacute;sicas de un dominio espec&iacute;fico: un
+                        comercio de venta de productos B2C (Negocio a Consumidor37). En este dominio, entidades como producto, 
+                        categor&iacute;a de productos, carro de compras, usuario, venta, se interrelacionan para responder a la navegaci&oacute;n
+                        del usuario por la aplicaci&oacute;n y a sus actividades transaccionales. Todas las entidades mencionadas se
+                        construyen a partir de informaci&oacute;n persistente, propiedad mantenida por la empresa en forma directa a trav&eacute;s 
+                        de un DBA (Administrador de Bases de Datos38) o simplemente aprovechando una funcionalidad incorporada
+                        de la aplicaci&oacute;n que permita manipular la base de datos. Esta &uacute;ltima alternativa es un ejemplo, entre otros
+                        fundamentos, de la importancia del diseño conceptual en el desarrollo de aplicaciones: el mismo esquema de
+                        objetos y relaciones que en principio pudieron ser diseñadas &uacute;nicamente para mostrar informaci&oacute;n
+                        navegacional, puede ser abastecida con una interfaz que lleve a cabo la interacci&oacute;n con la base de datos,
+                        concentrando as&iacute; esta actividad en un &uacute;nico sector de la aplicaci&oacute;n, sin afectar al resto del modelo.
+                    </pre>
+                </p>
+
+                <p>
+                    <pre>
+                        37 Bussiness to Consumer
+                        38 DataBase Administrator
+                        En cada diseño conceptual existe comportamiento que escapa a la simple navegaci&oacute;n de informaci&oacute;n. Se trata 
+                        del comportamiento inherente de cada clase, y aunque la aplicaci&oacute;n particular no requiera que se implemente,
+                        es importante destacar que si la aplicaci&oacute;n crece el diseño conceptual debe estar preparado para ser extendido, 
+                        tal como cualquier diseño orientado a objetos. M&aacute;s adelante podr&aacute; observarse c&oacute;mo un modelo robusto y
+                        eficiente puede facilitar el trabajo de las capas restantes de la aplicaci&oacute;n.
+                        Retomando el diseño conceptual del ejemplo, el an&aacute;lisis anterior de las entidades del dominio permite afirmar 
+                        que dichas clases comparten (al menos) el comportamiento correspondiente a la interfaz con la capa de
+                        persistencia: todas las entidades fuertes son capaces de construirse a partir de identificadores, coincidentes
+                        con las claves primarias de las tablas correspondientes de la base de datos [23]. Las clases del diseño
+                        conceptual que representen a estas entidades podr&aacute;n obtener sus atributos al iniciarse y actualizar los cambios
+                        cuando sea necesario (realizando eventualmente alg&uacute;n tipo de almacenamiento temporal para mejorar la
+                        eficiencia). La consistencia de la informaci&oacute;n queda asegurada, entonces, por el comportamiento de los
+                        objetos del modelo.
+                        El lenguaje elegido para desarrollar la implementaci&oacute;n de esta capa de OOHDM es Java, presentado en la
+                        secci&oacute;n de tecnolog&iacute;as de este art&iacute;culo. Durante esta etapa se utilizar&aacute; tambi&eacute;n JDBC como paquete de vital
+                        importancia para el manejo de base de datos.
+                        En la Figura 1 pueden observarse las primeras capas de implementaci&oacute;n descritas anteriormente.
+                    </pre>
+                </p>
+
+                <!-- img -->
+                <img src="./img/img01.JPG" alt="imagen 1">
+
+                <p>
+                    <pre>
+                        La clase abstracta que define el comportamiento b&aacute;sico de las entidades del modelo y concentra la l&oacute;gica de
+                        interacci&oacute;n con la base de datos ser&aacute; denominada EntidadAbstracta. Para cumplir con los objetivos
+                        propuestos, esta clase debe ser capaz de crear una conexi&oacute;n con la base de datos, ejecutar consultas y retornar 
+                        los resultados para ser procesados. Por una cuesti&oacute;n de eficiencia, la creaci&oacute;n de conexiones a la base de datos 
+                        podr&iacute;a ser delegada a un singleton [22], es decir, una clase capaz de controlar su instanciaci&oacute;n para retornar
+                        siempre la misma instancia en reiteradas llamadas a su constructor. Una clase con estas caracter&iacute;sticas podr&iacute;a
+                        ser instanciada por EntidadAbstracta para luego solicitarle una conexi&oacute;n.
+                        Como se explic&oacute; con anterioridad, las subclases de EntidadAbstracta son entidades capaces de construirse a
+                        partir de una clave, realizando una consulta a la base de datos que involucre una o m&aacute;s tablas y que retorne
+                        una tupla un&iacute;vocamente identificada por dicha clave. Los constructores de las subclases concretas de
+                        EntidadAbstracta pueden realizar estas consultas, utilizando en forma de template method [22] el 
+                        comportamiento heredado. En la Figura 2 puede observarse con mayor claridad la secuencia de pasos
+                        involucrados en la instanciaci&oacute;n de una entidad concreta; en este caso se instanciar&aacute; la clase Producto para 
+                        ejemplificar el proceso.
+                        S&oacute;lo la informaci&oacute;n m&aacute;s importante y de menor volumen es cargada desde la base de datos en el momento de 
+                        la instanciaci&oacute;n. La informaci&oacute;n restante puede ser cargada bajo demanda, a partir de un eventual
+                        requerimiento de la aplicaci&oacute;n. Para ilustrar esta idea con claridad puede considerarse cargar los siguientes
+                        atributos en la instanciaci&oacute;n de un Producto: descripci&oacute;n, categor&iacute;a, cantidad disponible y precio. En alg&uacute;n
+                        momento de la ejecuci&oacute;n, la aplicaci&oacute;n puede requerir los productos relacionados de un determinado producto BD.
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        Subconjunto de clases  del diseño conceptual  que interact&uacute;an con la  base de datos
+                        Diseño Conceptual
+                        Jerarqu&iacute;a de entidades
+                        Resto del modelo
+                        (por ejemplo, el usuario podr&iacute;a solicitar una lista de productos relacionados con el producto televisor, tales
+                        como video grabadora, filmadora, mesa para televisor, etc.); dado el volumen de esta informaci&oacute;n y lo
+                        espor&aacute;dico de su requerimiento, se sugiere entonces consultar a la base de datos para obtener esta informaci&oacute;n 
+                        s&oacute;lo cuando es requerida. Notar que la conexi&oacute;n a la base usada en cada consulta es siempre la solicitada en el 
+                        momento de la instanciaci&oacute;n, evitando con esto creaciones y destrucciones reiteradas de conexiones a la base
+                        de datos.
+                        Un modelo conceptual de estas caracter&iacute;sticas, obliga a considerar a todas las entidades del dominio como
+                        subclases de EntidadAbstracta (al menos todas aquellas entidades que se mantienen en la base de datos). Esta
+                        decisi&oacute;n de diseño puede refinarse a&uacute;n m&aacute;s para evitar al m&aacute;ximo la incorporaci&oacute;n de comportamiento de
+                        persistencia en las clases del dominio. Para alcanzar este objetivo puede utilizarse interfaces39 (mediante las
+                        cuales se pueden establecer contratos entre clases, permitiendo as&iacute; ligar a las clases del dominio con las
+                        encargadas de interactuar con la base de datos) y/o un modelo paralelo de wrappers [22] que encapsulen a las 
+                        clases del dominio (estos wrappers pueden encargarse directamente de la persistencia o interactuar con otras
+                        clases para factorizar c&oacute;digo, dejando en cada wrapper el comportamiento espec&iacute;fico requerido por la entidad
+                        encapsulada).
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        Es importante destacar que el diseño conceptual puede estar compuesto de otras clases que por su naturaleza
+                        no puedan considerarse subclases de EntidadAbstracta. Estos casos son simplemente colaboradores de
+                        entidades concretas, clases requeridas para realizar alguna actividad espec&iacute;fica y de corta vida &uacute;til, o algunos
+                        casos de entidades d&eacute;biles desde el punto de vista de diseño entidad-relaci&oacute;n. Consid&eacute;rese como ejemplo la
+                        informaci&oacute;n relacionada con la navegaci&oacute;n del usuario en una determinada sesi&oacute;n, irrelevante para otras
+                        sesiones e incluso para el resto de la aplicaci&oacute;n. En este caso, se requiere una clase para contener la
+                        informaci&oacute;n mencionada y el comportamiento para manipularla, pero no requiere considerar la persistencia
+                        dentro de su funcionalidad. 
+                        El resto de las consideraciones a tener en cuenta para implementar el diseño conceptual depende del dominio
+                        espec&iacute;fico. Hasta el momento se dispone de un modelo cuyas clases m&aacute;s importantes pueden instanciarse con 
+                        facilidad para crear objetos de la capa navegacional y posteriormente decorarse para ser presentados en alguna
+                        interfaz. La generalidad del diseño conceptual es una caracter&iacute;stica determinante para llevar a cabo este tipo
+                        de construcciones: es necesario considerar a las entidades sin acotar su funcionalidad ni estructura por
+                        cuestiones de usuarios o contextos navegacionales.
+                         
+                        39 Una interfaz [16] es un conjunto de firmas, es decir, un conjunto de declaraciones de operaciones.
+                        Cada operaci&oacute;n se declara con un nombre, los par&aacute;metros y el valor de retorno.                        
+                    </pre>
+                </p>
+                <!-- img -->
+                <img src="./img/img02.JPG" alt="imagen 2">
+
+                <p>
+                    <pre>
+                        A continuaci&oacute;n podr&aacute; observarse c&oacute;mo un nodo de la capa navegacional es construido realizando los
+                        requerimientos convenientes a la entidad o entidades del diseño conceptual que observa, generando as&iacute; una
+                        vista de dicha porci&oacute;n del diseño conceptual.
+                    </pre>
+                </p>
+            </section>
+            
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">
+                    6.2 Capa Navegacional
+                </h2>
+                <p>
+                    <pre>
+                        La capa navegacional se compone de objetos construidos a partir de objetos conceptuales, y constituyen en
+                        general los elementos can&oacute;nicos de las aplicaciones hipermedia tradicionales: nodos, enlaces, anclas y
+                        estructuras de acceso. Sin embargo, estas clases pueden extender el comportamiento caracter&iacute;stico para
+                        funcionar como adaptadores [22] de los objetos conceptuales y delegar as&iacute; operaciones espec&iacute;ficas del
+                        dominio.
+                        Entonces, los objetos navegacionales pueden actuar como observadores [22], para construir vistas de objetos
+                        conceptuales, y como adaptadores, para extender la actividad navegacional de un nodo y poder aprovechar el
+                        comportamiento conceptual del objeto adaptado. Estas dos perspectivas pueden implementarse aprovechando
+                        las virtudes inherentes de diferentes tecnolog&iacute;as: JSP para observar y Servlets para adaptar.
+                        Las p&aacute;ginas JSP ser&aacute;n responsables de construir los nodos de la capa navegacional. Esto se logra instanciando 
+                        los objetos del diseño conceptual necesarios para mostrar la informaci&oacute;n del nodo y utilizando los datos
+                        solicitados a dichas instancias para generar &aacute;rboles de elementos XML. Con este procedimiento se compone
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        Figura 2: Instanciaci&oacute;n de una subclase concreta de EntidadAbstracta
+                        un nodo concentrando informaci&oacute;n relacionada en un documento XML generado din&aacute;micamente con cada
+                        requerimiento, lo que permite adem&aacute;s personalizar el contenido (datos sin presentaci&oacute;n) a partir de infinitas 
+                        configuraciones, tales como un perfil de usuario, la sobrecarga de requerimientos de la aplicaci&oacute;n, la historia
+                        registrada de la navegaci&oacute;n, pol&iacute;ticas de protecci&oacute;n de contenidos, seguridad, etc.
+                        La Figura 3 ilustra la construcci&oacute;n del nodo a partir de un requerimiento HTTP proveniente de un cliente
+                        remoto.
+                    </pre>
+                </p>
+
+                <!-- img -->
+                <img src="./img/img03.JPG" alt="imagen 3" style="display: block;">
+                <img src="./img/img04.JPG" alt="imagen 4" style="display: block;">
+
+                <p>
+                    <pre>
+                        Como puede observarse, la cadena se inicia con un requerimiento del usuario que navega por la aplicaci&oacute;n. Al
+                        acceder a un enlace, una p&aacute;gina JSP es invocada para construir una p&aacute;gina XML (cuya presentaci&oacute;n ser&aacute;
+                        explicada en breve). En principio, el archivo XML generado puede ser &uacute;til para transferir informaci&oacute;n entre
+                        servidores cooperativos, o simplemente entre un cliente y un servidor con un esquema tradicional. En
+                        cualquier caso, la portabilidad brindada por las caracter&iacute;sticas simples de XML hacen posible una
+                        transferencia transparente incluso entre plataformas completamente heterog&eacute;neas. M&aacute;s adelante se podr&aacute;
+                        descubrir la verdadera raz&oacute;n por la cual se elige una salida con formato XML para los nodos de la capa
+                        navegacional.
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        Antes de abordar la implementaci&oacute;n de la capa de presentaci&oacute;n es necesario describir la segunda perspectiva
+                        de los nodos, vistos como adaptadores de objetos conceptuales. Un ejemplo donde se observa claramente este
+                        tipo de nodos es el carro de compras. Para mostrar el contenido del carro de compras del usuario es necesario 
+                        instanciar el objeto conceptual CarroDeCompras (notar que el identificador del usuario que navega la
+                        aplicaci&oacute;n y solicita acceder a su carro de compras es el &uacute;nico dato que se necesita para invocar al constructor 
+                        de dicha entidad). De este modo, el nodo construido a partir de esta informaci&oacute;n no s&oacute;lo concentra los datos 
+                        de las compras sino que adem&aacute;s ofrece un men&uacute; de operaciones para manipular el carro de compras, como
+                        borrar un elemento, cambiar la cantidad solicitada de un producto, vaciar el carro, finalizar la compra. Todas
+                        estas operaciones no son responsabilidad del nodo, sino que son realizadas por el objeto conceptual. Entonces, 
+                        delegar responsabilidad es lo &uacute;nico que debe hacer el nodo navegacional en este caso: la actividad delegada
+                        contin&uacute;a dentro de un servlet y finalmente es el servlet quien se encarga de redireccionar la navegaci&oacute;n a una
+                        p&aacute;gina JSP para eventualmente mostrar un resultado.
+                        <br>
+                        Los servlets son una herramienta muy &uacute;til para realizar actividades del lado del servidor y retornar
+                        informaci&oacute;n al cliente para informarle sobre el trabajo realizado o para solicitarle par&aacute;metros y retomar alguna
+                        operaci&oacute;n. Continuando con el ejemplo del carro de compras, en caso que la operaci&oacute;n elegida por el usuario
+                        sea vaciar el contenido (entre otras operaciones que puede seleccionar), una transacci&oacute;n debe ejecutarse a
+                        cargo del objeto CarroDeCompras correspondiente, a fin de modificar la base de datos satisfaciendo el deseo
+                        del usuario. Dado que este deseo es manifestado a trav&eacute;s de un requerimiento (por ejemplo, realizando un get
+                        a trav&eacute;s de una URL, o un post a trav&eacute;s de un formulario HTML) la acci&oacute;n debe continuar en alg&uacute;n sector de 
+                        la aplicaci&oacute;n, sin necesidad de mostrar informaci&oacute;n durante el proceso, al menos en este caso puntual.
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        Entonces, puede construirse un paquete de servlets capaces de realizar operaciones espec&iacute;ficas e incluso
+                        agruparse en jerarqu&iacute;as para aprovechar la herencia de comportamiento. A manera de ejemplo, consid&eacute;rese la
+                        jerarqu&iacute;a de servlets de la Figura 4, diseñados para servir acciones espec&iacute;ficas referidas al CarroDeCompras.
+                    </pre>
+                </p>
+
+                <!-- img -->
+                <img src="./img/img05.JPG" alt="imagen 5">
+
+                <p>
+                    <pre>
+                        El servlet abstracto de la aplicaci&oacute;n es una clase que podr&iacute;a ser &uacute;til si se tiene comportamiento com&uacute;n a todos 
+                        los servlets construidos para una aplicaci&oacute;n espec&iacute;fica. Luego, el servlet abstracto CarroDeComprasServlet
+                        define el comportamiento y la estructura de los servlets que encapsulan la l&oacute;gica de una operaci&oacute;n
+                        determinada sobre el carro de compras. No es necesario construir una subclase por operaci&oacute;n concreta; varias
+                        operaciones pueden encapsularse en una &uacute;nica clase y parametrizarse adecuadamente si son semejantes.
+                        AgregarProductoServlet servlet abstracto de la aplicaci&oacute;n EliminarProductoServlet VaciarCarroServlet FinalizarCompraServlet HttpServlet CarroDeComprasServlet
+                        En este escenario, cada subclase concreta de servlet tiene la responsabilidad de ejecutar una operaci&oacute;n y
+                        retornar al cliente mostrando una p&aacute;gina fija o calculada din&aacute;micamente en funci&oacute;n del resultado de la
+                        operaci&oacute;n. Un ejemplo que puede considerarse para cualquier actividad es alternativa entre un resultado
+                        exitoso o uno err&oacute;neo, de la operaci&oacute;n ejecutada. En el primer caso, la navegaci&oacute;n podr&iacute;a continuar por una
+                        p&aacute;gina JSP capaz de ilustrar la forma de proseguir la actividad, o de mostrar los resultados de la misma. En el 
+                        segundo caso, la navegaci&oacute;n se ver&iacute;a interrumpida por una p&aacute;gina JSP que informara sobre el error producido
+                        y eventualmente solicitara la correcci&oacute;n de par&aacute;metros, u ofreciera reintentar la operaci&oacute;n.
+                        Por razones de espacio, la implementaci&oacute;n de contextos no ser&aacute; tratada y se contin&uacute;a directamente con la capa
+                        de presentaci&oacute;n.
+                    </pre>
+                </p>
+
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">
+                    6.3 Capa de Interfaz Abstracta
+                </h2>
+                <p>
+                    <pre>
+                        Tanto un nodo actuando como observador como un nodo actuando como adaptador, finalmente contin&uacute;a por
+                        mostrar cierta informaci&oacute;n y para ello necesita definir la forma de presentaci&oacute;n mediante la cual dicha
+                        informaci&oacute;n ser&aacute; visualizada en la interfaz. Para ello se incorporan las dos &uacute;ltimas tecnolog&iacute;as a las que se
+                        har&aacute; menci&oacute;n en este art&iacute;culo: XSL y un mecanismo de an&aacute;lisis sint&aacute;ctico para obtener una p&aacute;gina HTML en 
+                        funci&oacute;n de un par de documentos XML/XSL.
+                        <br>
+                        Las p&aacute;ginas XSL, ubicadas tambi&eacute;n del lado del servidor, definir&aacute;n la apariencia de los nodos que se
+                        generaron en formato XML. Cada p&aacute;gina XSL define la forma en que los elementos del XML asociados ser&aacute;n 
+                        mostrados, haciendo uso de c&oacute;digo HTML y eventualmente CSS [24], para dar el formato deseado a las
+                        p&aacute;ginas finales. Enlaces y estructuras de acceso tambi&eacute;n son presentados conforme con los estilos adoptados
+                        para este tipo de informaci&oacute;n navegacional.
+                        <br>
+                        El v&iacute;nculo entre un XML y su apariencia puede establecerse en forma expl&iacute;cita, con una etiqueta especial
+                        situada en la primera l&iacute;nea del archivo XML, o bien podr&iacute;a ser calculado en forma din&aacute;mica para satisfacer
+                        demandas de personalizaci&oacute;n. En cualquier caso, retornar al cliente con un archivo XML que haga referencia
+                        a un archivo XSL ubicado en el servidor tiene al menos dos inconvenientes: genera un tr&aacute;fico de ida y vuelta
+                        innecesario, ya que podr&iacute;a evitarse enviando directamente el c&oacute;digo HTML al cliente, y puede requerir
+                        caracter&iacute;sticas especiales en el explorador del cliente que pueden privarlo de visualizar la p&aacute;gina
+                        correctamente.
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        La transformaci&oacute;n del lado del servidor es provista en la actualidad por paquetes como Xalan-Java [25] y 
+                        Saxon [26]. Un esquema de la operaci&oacute;n de transformaci&oacute;n puede observarse en la Figura 5.
+                    </pre>
+                </p>
+
+                <!-- img -->
+                <img src="./img/img06.JPG" alt="imagen 6">
+
+                <p>
+                    <pre>
+                        Figura 5: Generaci&oacute;n de un documento HTML a partir de una fuente XML + XSL
+                        El lenguaje XSLT (Transformaciones XSL40) [27] se utiliza para componer hojas de estilo XSL. Estos
+                        documentos contienen instrucciones que mediante el uso de Xalan-Java, por ejemplo, sirven para llevar a
+                        cabo las transformaciones y producir un documento de salida, una secuencia de caracteres o de bytes, un
+                        DOM (Modelo de Objetos de Documento41), etc. En el caso particular mencionado anteriormente, se desea
+                        obtener un documento de salida con formato HTML a partir de un par de documentos XML / XSL.
+                        Aqu&iacute; concluye la planificaci&oacute;n del desarrollo en capas. Finalmente, las tres capas de diseño han sido
+                        implementadas por separado. Se ha intentado mantener la independencia de los elementos del dominio con las
+                        construcciones navegacionales y de presentaci&oacute;n, haciendo uso de las tecnolog&iacute;as adecuadas para trabajar con
+                        OOHDM, y aprovechar al m&aacute;ximo las virtudes de una aplicaci&oacute;n de objetos.
+                    </pre>
+                </p>
+            </section>
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <h2 style="padding-left: 8em;">
+                    7 Conclusiones                    
+                </h2>
+                <p>
+                    <pre>
+                        En este art&iacute;culo se presenta un enfoque para implementar aplicaciones Web usando OOHDM como t&eacute;cnica de
+                        diseño. Dicha metodolog&iacute;a propone dedicar un tiempo importante en las fases previas a la implementaci&oacute;n.
+                        Esta inversi&oacute;n de tiempo est&aacute; ampliamente justificada no s&oacute;lo porque simplifica el proceso de desarrollo,
+                        facilitando el trabajo del equipo encargado de cada capa de la aplicaci&oacute;n, sino tambi&eacute;n durante su
+                        mantenimiento y eventual extensi&oacute;n. Son quiz&aacute;s estas &uacute;ltimas tareas las m&aacute;s dif&iacute;ciles de lograr con
+                        tecnolog&iacute;as tradicionales, y a&uacute;n imposibles en muchos casos donde no existe diseño detallado y la
+                        implementaci&oacute;n concentra conceptos heterog&eacute;neos muy dif&iacute;ciles de modificar.
+                        OOHDM propone un conjunto de tareas que en principio pueden involucrar mayores costos de diseño, pero
+                        que a mediano y largo plazo reducen notablemente los tiempos de desarrollo al tener como objetivo principal 
+                        la reusabilidad de diseño, y as&iacute; simplificar la evoluci&oacute;n y el mantenimiento. El presente art&iacute;culo complementa
+                        la presentaci&oacute;n te&oacute;rica de la metodolog&iacute;a con una idea concreta de implementaci&oacute;n, usando tecnolog&iacute;as
+                        potentes y de alto crecimiento.
+                    </pre>
+                </p>
+            </section>       
+
+            <section style="display: grid; width: 96%; place-items: center;">
+                <div>
+                    <div style="display: grid;">
+                        <div style="display: grid; margin-bottom: 3em;">
+                            <h2 style="padding-left: 8em;">Referencias</h2>
+                            <ul>
+                                <li>
+                                    <p>[1] W. De Muynck. Bridging the Gap between XML and Hypermedia: a Layered Transformational
+                                        Approach, Tesis. Approach, Vrije Universiteit Brussel, Belgium, 2000.</p>
+                                </li>
+                                <li>
+                                    <p>[2] D. Schwave and G. Rossi. An Object Oriented Approach to Web-Based Application Desing. En: Theory 
+                                        and Practice of Object Systems (TAPOS), October 1998.</p>
+                                </li>
+                                <li>
+                                    <p>[3] D. Schwave et al. Engineering Web Applications for Reuse. IEEE Multimedia, Vol 8 Nro 1, pp 20-31.</p>
+                                </li>
+                                <li>
+                                    <p>[4] G. Rossi; D. Schwave and Fernando Lyardet. Web application models are more than conceptual models. 
+                                        En: Proceedings of the First Internation Workshop on Conceptual Modeling and the WWW, Paris,
+                                        France, November 1999.</p>
+                                </li>
+                                <li>
+                                    <p>[5] D. Cowan and C. Lucena. Abstract Data Views: An Interface Specification Concept to Enhance Design
+                                        for Reuse. IEEE Transactions on Software Engineering. Vol. 21, No. 3, March 1995.</p>
+                                </li>
+                                <li>
+                                    <p>[6] N. Koch. Comparing Development Methods for Web Applications. Ludwig-Maximilians-University 
+                                        Munich, Institute of Computer Science Oettingenstr. 67, 80538 München, Germany. 2000.</p>
+                                </li>
+                                <li>
+                                    <p>[7] F. Garzotto; L. Mainetti and P. Paolini. Hypermedia design analysis. Communications of the ACM,
+                                        8(38), 74-86. 1995.</p>
+                                </li>
+                                <li>
+                                    <p>[8] T. Isakowitz; E. Stohr and P. Balasubramanian. A methodology for the design of structured hypermedia
+                                        applications. Communications of the ACM, 8(38), 34-44. 1995.</p>
+                                </li>
+                                <li>
+                                    <p>[9] D. Lange. An object-oriented design approach for developing hypermedia information systems. Journal
+                                        of Organizational Computing and Electronic Commerce, 6(3),269-293. 1996.</p>
+                                </li>
+                                <li>
+                                    <p>[10] H. Lee; C. Lee and C. Yoo. A scenario-based object-oriented methodology for developing hypermedia
+                                        information systems. En: Proceedings of 31st Annual Conference on Systems Science, Eds. Sprague R.
+                                        1998.</p>
+                                </li>
+                                <li>
+                                    <p>[11] O. De Troyer and C. Leune. WSDM: A user-centered design method for Web sites. En: Proceedings of 
+                                        the 7th International World Wide Web Conference. 1997.</p>
+                                </li>
+                                <li>
+                                    <p>[12] J. Conallen. Building Web application with UML. Addison Wesley. 1999.</p>
+                                </li>
+                                <li>
+                                    <p>[13] Java Sun, The Java Tutorial: A practical guide for programmers,
+                                        <a href="http://Java.sun.com/docs/books/tutorial">http://Java.sun.com/docs/books/tutorial</a>, Marzo de 2001.</p>
+                                </li>
+                                <li>
+                                    <p>[14] Java Sun, JDBC API tutorial and reference - Second Edition, <a href="http://Java.sun.com/products/jdbc/">http://Java.sun.com/products/jdbc/</a>, Marzo de 2001.</p>
+                                </li>
+                                <li>
+                                    <p>[15] Java Sun, JavaTM Servlet Technology: The Power Behind the Server,
+                                        <a href="http://Java.sun.com/products/servlet">http://Java.sun.com/products/servlet</a>, Marzo de 2001.</p>
+                                </li>
+                                <li>
+                                    <p>[16] Eva.Arderiu, Javier.Conde. Objectivity/DB and JAVA,
+                                        <a href="http://wwwinfo.cern.ch/asd/cernlib/rd45/objy_Java_info.htm#Servlets">http://wwwinfo.cern.ch/asd/cernlib/rd45/objy_Java_info.htm#Servlets</a>, Marzo de 2001.</p>
+                                </li>
+                                <li>
+                                    <p>[17] K. Avedal et al. Professional JSP, Wrox Press 2000.</p>
+                                </li>
+                                <li>
+                                    <p>[18] Java Sun, Java Server PagesTM: Dinamically Generated Web Content,
+                                        <a href="http://www.Javasoft.com/products/jsp/">http://www.Javasoft.com/products/jsp/</a>, Marzo de 2001.</p>
+                                </li>
+                                <li>
+                                    <p>[19] World Wide Web Consortium (W3C), Extensible Markup Language (XML). The base specifications
+                                        are XML 1.0, W3C Recommendation Feb '98, and Namespaces, Jan '99. <a href="http://www.w3.org/XML">http://www.w3.org/XML</a>, 
+                                        Marzo de 2001.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>[20] World Wide Web Consortium (W3C), Extensible Stylesheet Language (XSL), Version 1.0.W3C
+                                        Candidate Recommendation 21 November 2000. <a href="http://www.w3.org/TR/xsl">http://www.w3.org/TR/xsl</a>, Marzo de 2001.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>[21] R. Anderson et at.. Professional XML, Wrox Press 2000.</p>
+                                </li>
+                                <li>
+                                    <p>[22] E. Gamma et al. Design Patterns: Elements of reusable object-oriented software, Addison-Wesley, 
+                                        1995.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>[23] H. F. Korth y Abraham Silberschatz. Fundamentos de Base de Datos. Segunda Edici&oacute;n en español,
+                                        McGraw-Hill, 1993.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>[24 ] CCS Test Suite, W3C Core Styles. <a href="http://www.w3.org/Style/CSS/">http://www.w3.org/Style/CSS/</a>, Marzo de 2001.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>[25] The Apache Software Foundation, Xalan – Java Version 1.2.2. <a href="http://xml.apache.org/xalan/">http://xml.apache.org/xalan/</a>, Marzo de
+                                        2001.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>[26] Michael H. Kay, About Saxon, <a href="http://users.iclway.co.uk/mhkay/saxon/instant.html">http://users.iclway.co.uk/mhkay/saxon/instant.html</a>, Marzo de 2001.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>[27] World Wide Web Consortium (W3C), Extensible Stylesheet Language Transformations (XSLT),
+                                        Version 1.0. W3C Recommendation 16 November 1999. <a href="http://www.w3.org/TR/xslt">http://www.w3.org/TR/xslt</a>, Marzo de 2001.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <p>
+                                <pre>
+                                    Nombre de archivo: Articulo Dario Silva-Barbara Mercera.doc
+                                    Directorio: A:
+                                    Plantilla: C:\WINDOWS\Application Data\Microsoft\Plantillas\Normal.dot
+                                    T&iacute;tulo: Construyendo aplicaciones web con una metodolog&iacute;a de diseño orientada 
+                                    a objetos
+                                    Asunto:
+                                    Autor: Silva - Mercerat
+                                    Palabras clave: Aplicaciones web, tecnolog&iacute;as de desarrollo, programaci&oacute;n orientada a 
+                                    objetos, diseño en capas, contenido din&aacute;mico, patrones de diseño.
+                                    Comentarios:
+                                    Fecha de creaci&oacute;n: 29/01/02 12:12 P.M.
+                                    Cambio n&uacute;mero: 2
+                                    Guardado el: 29/01/02 12:12 P.M.
+                                    Guardado por: UNAB
+                                    Tiempo de edici&oacute;n: 0 minutos
+                                    Impreso el: 01/02/02 09:13 A.M.
+                                    &uacute;ltima impresi&oacute;n completa
+                                    N&uacute;mero de p&aacute;ginas: 20
+                                    N&uacute;mero de palabras: 7,640 (aprox.)
+                                    N&uacute;mero de caracteres: 43,553 (aprox.)
+                                </pre>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+</body>
+</html>

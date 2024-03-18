@@ -1,7 +1,4 @@
-
-# dependencies
-./ejer1/node_modules
-
-
-# env variables
+#dependencies
+./server/node_modules
+#.env
 .env*
