@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<!--  Elias Eduardo Cardona Rodríguez  -->
+<!--  Licenciatura en Informática y Tecnologías Computacionales  -->
+<!--  SEMESTRE:  4°A  -->
+<header>
+	<meta http-equiv="Content-Type", content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+	<link rel="stylesheet" href="./index.css">
+	<title>Inscripci&oacute;n a cursos - Universidad Auton&oacute;ma de Aguascalientes</title>
+</header>
+<body>
+	<main class="main">
+		<div class="ly">
+			<div>
+				<div class="img_ctn">
+					<img src="./uaa.png" alt="Logotipo de la UAA">
+				</div>
+			</div>
+			<!-- formulario -->
+			<div>
+				<span class="lg_span">C&eacute;dula de inscripci&oacute;n al curso</span>
+				<span class="divider"></span>
+
+				<form action="recibo.html" method="GET" enctype="text/plain" class="form">
+					<label for="nombre">Nombre: </label>
+					<input type="text" id="nombre" name="nombre" class="in_text">
+					<span class="divider"></span>
+					
+					<label for="id">ID: </label>
+					<input type="text" id="id" name="id" class="in_text">
+					<span class="divider"></span>
+					
+					<label for="edad">Edad: </label>
+					<input type="number" id="edad" name="edad" class="in_text">
+					<span class="divider"></span>
+					
+					<!-- radio group -->
+					<label class="mr_1">Sexo: </label>
+					<div class="radio_list">
+						<input id="rd1" name="sexo" type="radio">
+						<label for="rd1">Hombre</label>
+					
+						<input id="rd2" name="sexo" type="radio">
+						<label for="rd2">Mujer</label>
+					
+						<input id="rd3" name="sexo" type="radio">
+						<label for="rd3">Prefiero no responder</label><br>
+						<!-- fin del radio group -->
+						<span class="divider"></span>
+					</div>
+					
+					<!-- grupo de entradas -->
+					<label for="fechaNacimiento">Fecha de nacimiento: </label>
+					<input type="date" id="fechaNacimiento" name="fechaNacimiento" class="in_text">
+					<span class="divider"></span>
+					
+					<label for="nombreCurso">Nombre del curso: </label>
+					<input type="text" id="nombreCurso" name="nombreCurso" class="in_text">
+					<span class="divider"></span>
+					<span class="divider"></span>
+					<!-- fin del grupo -->
+					
+					<!-- periodo a cursar -->
+					<span class="md_span">Periodo de impartici&oacute;n:</span>
+					<div>
+						<label class="mr_2">Del: </label>
+						<input type="date" id="fechaInicio" name="fechaInicio">
+						<label class="ml_2 mr_1">al: </label>
+						<input type="date" id="fechaFin" name="fechaFin"><br>
+					</div>
+					<span class="divider"></span>
+					<span class="divider"></span>
+					<!-- fin de periodo a cursar -->
+					
+					<!-- checks para dias a cursar -->
+					<span class="md_span">Horario:</span>
+					<div class="check_list">
+						<label class="mr_1">D&iacute;as que vas a cursar: </label>
+					
+						<input id="ck1" name="diasCursar" type="checkbox">
+						<label for="ck1">Lun</label>
+						<input id="ck2" name="diasCursar" type="checkbox">
+						<label for="ck2">Mar</label> 
+						<input id="ck3" name="diasCursar" type="checkbox">
+						<label for="ck3">Mie</label>
+						<input id="ck4" name="diasCursar" type="checkbox">
+						<label for="ck4">Jue</label>
+						<input id="ck5" name="diasCursar" type="checkbox">
+						<label for="ck5">Vie</label>
+						<input id="ck6" name="diasCursar" type="checkbox">
+						<label for="ck6">Sab</label><br>
+						<!-- fin de los checks para dias -->
+						<span class="divider"></span>
+					</div>
+					<!-- selección de horario -->
+					<div>
+						<label class="mr_2">Del: </label>
+						<input type="time" id="horaInicio" name="horaInicio" min="07:00" max="13:00">
+						<label class="ml_2 mr_1">al: </label>
+						<input type="time" id="horaFin" name="horaFin" min="16:00" max="21:00"><br>
+					</div>
+					<span class="divider"></span>
+					<span class="divider"></span>
+					<!-- fin de selección de horario -->
+					
+					<!-- datalist para nivel de estudios -->
+					<label for="nivelEstudios">&Uacute;ltimo grado de estudios: </label>
+					<input list="dl-1" id="nivelEstudios" name="nivelEstudios" />
+					<datalist id="dl-1">
+						<option value="Sin estudios"></option>
+						<option value="Primaria"></option>
+						<option value="Secundaria"></option>
+						<option value="Preparatoria"></option>
+						<option value="Universidad"></option>
+					</datalist><br>
+					<span class="divider"></span>
+					<span class="divider"></span>
+					<!-- fin de datalist para nivel de estudios -->
+					
+					<!-- motivos de ingreso al curso -->
+					<div>
+						<label for="motivos">Describa por qu&eacute; est&aacute; interesado en estudiar este curso: </label>
+						<br>
+						<textarea cols="50" rows="4" id="motivos" name="motivos"></textarea><br>
+						<span class="divider"></span>
+					</div>
+					
+					<!-- datalist para medios de comunicación -->
+					<label for="medioComunicacion">&#191;Por qu&eacute; medio se enter&oacute; de este curso&#63;</label>
+					<input list="dl-2" id="medioComunicacion" name="medioComunicacion" />
+					<datalist id="dl-2">
+						<option value="P&aacute;gina web"></option>
+						<option value="Correo electr&oacute;nico"></option>
+						<option value="Anuncio en TV"></option>
+						<option value="Anuncio en Radio"></option>
+						<option value="Amigo o Familiar"></option>
+						<option value="Compa&ntilde;ero de Estudios"></option>
+						<option value="Otro"></option>
+					</datalist><br>
+					<span class="divider"></span>
+					<span class="divider"></span>
+					<!-- fin de datalist para medios de comunicación -->
+					
+					<!-- momento exacto de inscripción -->
+					<div>
+						<label class="mr_2">Fecha y Hora de Registro: </label>
+						<input type="datetime-local" value="2024-03-18T08:00" id="fechaRegistro" name="fechaRegistro">
+					</div>
+					<span class="divider"></span>
+					<span class="divider"></span>
+					<!-- fin de entrada para momento exacto de inscripción -->
+					
+					<input type="submit" value="Enviar">					
+				</form>
+
+			</div>
+		</div>		
+	</main>
+</body>
+</html>

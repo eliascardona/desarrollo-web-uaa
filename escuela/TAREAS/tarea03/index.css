@@ -1,0 +1,70 @@
+.main {
+    padding-top: 2em;
+    padding-left: 4em;
+}
+
+.form {
+    display: block;
+}
+
+.in_text {
+    margin-left: 3em;
+}
+
+.ly {
+    width: 100%;
+    display: grid;    
+}
+
+.img_ctn {    
+    position: relative;
+    top: 0;
+    width: 210px;
+    height: 70px;
+    display: block;
+    object-fit: cover;
+}
+
+.img_ctn img {
+    width: 100%;
+}
+
+.divider {    
+    display: block;
+    height: 0.9em;
+}
+
+.md_span {
+    display: block;
+    font-size: 1.25em;
+    margin-bottom: 0.6em;
+}
+
+.lg_span {
+    display: block;
+    font-size: 1.4em;
+}
+
+.mr_1 {
+    margin-right: 2em;
+}
+
+.mr_2 {
+    margin-right: 4em;
+}
+
+.ml_2 {
+    margin-left: 3em;
+}
+
+.radio_list {
+    display: inline;
+}
+
+.radio_list input[type=radio] {
+    margin-left: 2em;
+}
+
+.check_list input[type=checkbox] {
+    margin-left: 1em;
+}
