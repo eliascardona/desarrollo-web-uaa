@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculadora de Figuras Geométricas</title>
+	<link rel="stylesheet" href="./ejer2.css">
+</head>
+<!--  Elias Eduardo Cardona Rodríguez  -->
+<!--  Licenciatura en Informática y Tecnologías Computacionales  -->
+<!--  SEMESTRE:  4°A  -->
+<body>
+	<div class="global">
+		<div class="container">
+			<h1>Calculadora de Figuras Geométricas</h1>
+			<select id="figura" class="select">
+				<option value="cuadrado">Cuadrado</option>
+				<option value="rectangulo">Rectángulo</option>
+				<option value="circulo">Círculo</option>
+			</select>
+			<div id="formulario" class="formulario">
+			</div>
+			<div class="padd">
+				<button type="button" id="calcularBtn" class="calcularBtn">
+					<span>
+						calcular 
+					</span>
+					<span id="nombreFigura">
+					</span>
+				</button>
+			</div>
+			<!-- Cuadro en donde se muestran los resultados -->
+			<div id="resultados" class="resultados"></div>
+		</div>
+	</div>
+	<script src="./ejer2.js" defer></script>
+</body>
+</html>

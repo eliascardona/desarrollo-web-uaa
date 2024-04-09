@@ -1,0 +1,105 @@
+.body {
+    font-family: sans-serif;
+    overflow-x: auto;
+    zoom: 0.65;
+    -ms-zoom: 0.65;
+    margin: 0;
+}
+
+.table {
+    border-collapse: separate;
+    border: 2px solid #fff;
+    letter-spacing: 1px;
+    font-size: 0.8em;
+}
+
+td, th {
+    border: 1px solid #EEEEEE;
+}
+
+th {
+    background-color: rgb(235,235,235);
+}
+
+.celda {
+    width: 106px;
+}
+
+.celdaGrid {
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.lateral {
+    font-size: 0.7em;
+    text-align: right;
+    padding-right: 0.4em;
+}
+
+.simbolo {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+h1 {
+    text-align: center;
+    background-color: #008DDA;
+}
+
+.Ora {
+    background-color: #FFCF81;
+}
+
+.Morado {
+    background-color: #E178C5;
+}
+
+.especial {
+    background-color: #5755FE;
+}
+
+.Gris {
+    background-color: #DDDDDD;
+}
+
+.Naranja {
+    background-color: #FFAF45;
+}
+
+.Amarillo {
+    background-color: #FFC700;
+}
+
+.Rosa {
+    background-color: #FC819E;
+}
+
+.azul_neutro {
+    background-color: #67C6E3;
+}
+
+.Verde {
+    background-color: #74E291;
+}
+
+.azul_bajito {
+    background-color: #BBE2EC;
+}
+
+.Blanco {
+    background-color: #F6F5F5;
+}
+
+.Vacio {
+    empty-cells: hide;
+}
+
+table.metales_extranos {
+    margin-left: 6.5rem;
+}
+
+
+table.metales_extranos td {
+    width: 104px;
+    padding: 2em 0;
+}

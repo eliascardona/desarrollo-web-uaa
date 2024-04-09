@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Reservación de Hotel</title>
+	<link rel="stylesheet" href="./ejer3.css">
+</head>
+<!--  Elias Eduardo Cardona Rodríguez  -->
+<!--  Licenciatura en Informática y Tecnologías Computacionales  -->
+<!--  SEMESTRE:  4°A  -->
+<body>
+	<div class="global">
+		<div class="container">
+			<h2>Reservación de Hotel</h2>
+			<div>
+				<form id="reservationForm">
+					<label for="checkInDate">Fecha de Entrada:</label>
+					<input type="date" id="checkInDate" required><br>
+			
+					<label for="checkOutDate">Fecha de Salida:</label>
+					<input type="date" id="checkOutDate" required><br>
+			
+					<label for="roomType">Tipo de Habitación:</label>
+					<select id="roomType">
+						<option value="estandar">Estándar</option>
+						<option value="superior">Superior</option>
+						<option value="juniorSuite">Junior Suite</option>
+						<option value="suite">Suite</option>
+					</select>
+					<br>
+			
+					<label for="includeBreakfast">Incluir Desayuno:</label>
+					<input type="checkbox" id="includeBreakfast"><br>
+			
+					<button type="button" onclick="calcularTotal()">Calcular Total</button>
+				</form>
+			</div>
+			<div id="result"></div>
+		</div>
+	</div>
+
+	<script src="./ejer3.js"></script>
+</body>
+</html>
